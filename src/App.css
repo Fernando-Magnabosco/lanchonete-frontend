@@ -4,6 +4,8 @@
   box-sizing: border-box;
 };
 
+
+
 .App {
   text-align: center;
 }
@@ -42,3 +44,4 @@
     transform: rotate(360deg);
   }
 }
+
