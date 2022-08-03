@@ -56,6 +56,10 @@ export const Login = styled.div`
             justify-content: center;
             flex-wrap: wrap;
 
+            span{
+                color: #FB0043;
+            }
+
             input{
                 padding: 10px;
                 height: 30px;
@@ -68,25 +72,22 @@ export const Login = styled.div`
             
                 }
 
-                color: #ffff;
+                color: #FB0043;
+                padding-left: 10px;
                 font-size: 15px;
 
                 
             }
 
             input::placeholder{
-                color: #FB0043;
-                padding-left: 10px;;
+                font-style: italic;
+                font-weight: 200;
             }
 
 
+
+
         }
-
-
-
-
-
-
 
         button{
 
@@ -95,11 +96,9 @@ export const Login = styled.div`
 
             text-align: center;
             font-family: 'Inter', sans-serif;
+            font-weight: 800;
             font-size: 30px;
             color: #FB0043;
-
-            /* width: 100%;
-            height: 52px; */
 
             width: 350px;
             height: 52px;
@@ -114,5 +113,52 @@ export const Login = styled.div`
             cursor: pointer;
 
         }
+
+        .area-lembrar{
+
+            width: 350px;
+            display: flex;
+            justify-content: space-between;
+            color: #FB0043;
+
+            input{
+                all: unset;
+                display: inline-block;
+                background-color: #141414;
+                width: fit-content;
+                height: 19px;
+                width: 19px;
+                border-radius: 2px;
+                
+                transition: background-color 200ms ease-in-out;
+                
+                &:checked{
+                    background-color: #FB0043;
+                }
+            }
+
+            
+            h3, p{
+                font-size: 16px;
+                font-family: 'Inter', sans-serif;
+                font-weight: 200;
+            }
+
+            .marcar:after{
+                content: "";
+                position: absolute;
+                display:none;
+                width: 19px;
+                height: 19px;
+                border-radius: 2px;
+                background: blue;
+                
+            }
+
+        }
+
+
+        
+
     }
 `;
