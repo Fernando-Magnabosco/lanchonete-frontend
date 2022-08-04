@@ -15,93 +15,89 @@ export const Login = styled.div`
         width: 420px;
         height: 540px;
         display: flex;
-        
+
         flex-wrap: wrap;
         justify-content: center;
-        
-        font-family: 'Inter', sans-serif;
+        padding: 70px;
+        font-family: "Inter", sans-serif;
 
         background: #242424;
         border-width: 0.2px 2px 2px 0.2px;
         border-style: solid;
-        border-color: #0D0D0D;
+        border-color: #0d0d0d;
         border-radius: 150px 0px;
 
-        .area-title{
+        .area-title {
             height: fit-content;
-            color: #FB0043;
+            color: #fb0043;
             font-size: 40px;
-            margin-top: 70px;
+
             align-items: center;
 
-            h2{
+            h2 {
                 margin-bottom: 5px;
                 text-align: center;
                 cursor: default;
             }
 
+<<<<<<< HEAD
             hr{
+=======
+            hr {
+                /* border-color: black; */
+                /* height: 1px; */
+>>>>>>> b3270d5ca0671ab5784431e4df6ba496b729e331
                 border: 1px solid #000000;
-                width: 350px ;
+                width: 350px;
             }
         }
 
-        form{
-            
+        form {
             height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
 
-            span{
-                color: #FB0043;
+            span {
+                color: #fb0043;
             }
 
-            input{
+            input {
                 padding: 10px;
-                height: 30px;
+                height: 40px;
                 width: 350px;
-                border: 3px solid  #141414;
+                border: 3px solid #141414;
                 background: #242424;
                 outline: none;
-                &:focus{
+                &:focus {
                     border-color: #141414;
-            
                 }
 
-                color: #FB0043;
+                color: #fb0043;
                 padding-left: 10px;
                 font-size: 15px;
-
-                
             }
 
-            input::placeholder{
+            input::placeholder {
                 font-style: italic;
                 font-weight: 200;
             }
-
-
-
-
         }
 
-        button{
-
-            border:0px solid #242424;
-            
+        button {
+            border: 0px solid #242424;
 
             text-align: center;
-            font-family: 'Inter', sans-serif;
+            font-family: "Inter", sans-serif;
             font-weight: 800;
             font-size: 30px;
-            color: #FB0043;
+            color: #fb0043;
 
             width: 350px;
             height: 52px;
-            
-            border:0px solid #242424;
+
+            border: 0px solid #242424;
 
             background: var(--primary-color);
             border-width: 0px 2px 2px 0px;
@@ -109,17 +105,15 @@ export const Login = styled.div`
             border-color: rgba(36, 36, 36, 0.56);
 
             cursor: pointer;
-
         }
 
-        .area-lembrar{
-
+        .area-lembrar {
             width: 350px;
             display: flex;
             justify-content: space-between;
-            color: #FB0043;
+            color: #fb0043;
 
-            input{
+            input {
                 all: unset;
                 display: inline-block;
                 background-color: #141414;
@@ -127,36 +121,25 @@ export const Login = styled.div`
                 height: 19px;
                 width: 19px;
                 border-radius: 2px;
-                
-                transition: background-color 200ms ease-in-out;
-                
-                &:checked{
-                    background-color: #FB0043;
+
+                transition: background-color 150ms ease-in-out;
+
+                &:hover,
+                :focus {
+                    cursor: pointer;
+                    background-color: gray;
+                }
+                &:checked {
+                    background-color: #fb0043;
                 }
             }
 
-            
-            h3, p{
+            h3,
+            p {
                 font-size: 16px;
-                font-family: 'Inter', sans-serif;
+                font-family: "Inter", sans-serif;
                 font-weight: 200;
             }
-
-            .marcar:after{
-                content: "";
-                position: absolute;
-                display:none;
-                width: 19px;
-                height: 19px;
-                border-radius: 2px;
-                background: blue;
-                
-            }
-
         }
-
-
-        
-
     }
 `;
