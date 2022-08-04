@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HeaderArea = styled.div`
     .cabecalho{
+        
         width: 100%;
         height: 70px;
         background: #242424;
