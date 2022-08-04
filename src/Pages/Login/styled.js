@@ -19,6 +19,7 @@ export const Login = styled.div`
         flex-wrap: wrap;
         justify-content: center;
         padding: 70px;
+        
         font-family: "Inter", sans-serif;
 
         background: #242424;
