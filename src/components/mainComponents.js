@@ -15,5 +15,5 @@ export const PageBody = styled.div``;
 
 export const ErrorMessage = styled.div`
     color: #fb0043;
-    height: 1ch;
+    height: 2ch;
 `;

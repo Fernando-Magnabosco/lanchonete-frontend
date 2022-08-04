@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useApi from "../../helpers/api";
 import { Login, PageArea } from "./styled";
 import { doLogin } from "../../helpers/authHandler";
-import { ErrorMessage } from "../../components/MainComponents";
+import { ErrorMessage } from "../../components/mainComponents";
 
 const Page = () => {
     const api = useApi();

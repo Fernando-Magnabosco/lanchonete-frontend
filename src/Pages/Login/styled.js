@@ -63,11 +63,13 @@ export const Login = styled.div`
                 padding: 10px;
                 height: 40px;
                 width: 350px;
-                border: 3px solid #141414;
+                border: 1px solid #141414;
                 background: #242424;
                 outline: none;
-                &:focus {
-                    border-color: #141414;
+                transition: border-color 150ms ease-in-out;
+                &:hover,
+                :focus {
+                    border-color: #fb0043;
                 }
 
                 color: #fb0043;
@@ -101,6 +103,10 @@ export const Login = styled.div`
             border-color: rgba(36, 36, 36, 0.56);
 
             cursor: pointer;
+
+            &:hover {
+                border-color: #fb0043;
+            }
         }
 
         .area-lembrar {
