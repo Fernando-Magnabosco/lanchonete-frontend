@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import useApi from '../../helpers/api'
-import { Product, PageArea } from "../../components/Header/styled";
-import Header from '../../components/Header/index'
+import useApi from "../../helpers/api";
 
+<<<<<<< HEAD
 import { ErrorMessage } from "../../components/mainComponents";
+=======
+import { PageArea } from "./styled";
+import Header from "../../components/Header/index";
+>>>>>>> 8b6f1748c3ad909c51fcc6f03fba13279b52c9c5
+
+// import { ErrorMessage } from "../../components/MainComponents";
 
 const Page = () => {
-
     return (
         <PageArea>
             <Product>

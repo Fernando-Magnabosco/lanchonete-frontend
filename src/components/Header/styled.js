@@ -5,18 +5,22 @@ export const Product = styled.div`
         height: 70px;
         background: #242424;
 
-        font-family: 'Inter', sans-serif;
-        color: #FB0043;
+        font-family: "Inter", sans-serif;
+        color: #fb0043;
         font-size: 29px;
 
-        border-width:0px 0px 2px 0px ;
+        border-width: 0px 0px 2px 0px;
         border-style: solid;
-        border-color: #0D0D0D;
+        border-color: #0d0d0d;
 
-        h2{
+        a {
+            text-decoration: none;
+            color: #fb0043;
+        }
+
+        h2 {
             position: center;
             text-align: center;
         }
     }
-    
 `;

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Product } from "./styled";
+import { HeaderArea } from "./styled";
 
 const Page = (props) => {
     return (
-        <Product>    
+        <HeaderArea>
             <div className="cabecalho">
-                <h2>pollen</h2>
+                <a href="/">
+                    <h2>pollen</h2>
+                </a>
             </div>
-        </Product>
-        
+        </HeaderArea>
     );
 };
 export default Page;
