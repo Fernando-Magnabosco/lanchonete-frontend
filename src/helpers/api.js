@@ -127,6 +127,15 @@ const API = {
         });
         return json;
     },
+
+    getCategories: async () => {
+        const json = await apiFetchGet("/category/list");
+        return json;
+    },
+
+    getApi: () => {
+        return BASEAPI;
+    },
 };
 
 export default () => API;
