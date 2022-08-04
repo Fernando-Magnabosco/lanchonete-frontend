@@ -6,7 +6,7 @@ export const SearchArea = styled.div`
     padding: 20px 0;
 
     .searchBox {
-        background-color: var(--color-primary);
+        background-color: #242424;
         padding: 20px 15px;
         border-radius: 5px;
         box-shadow: 1px 1px 1px 0.3px rgba(0, 0, 0, 0.2);
@@ -37,7 +37,7 @@ export const SearchArea = styled.div`
             }
 
             button {
-                background-color: var(--color-tertiary);
+                background-color: #fb0043;
                 font-size: 15px;
                 border: 0;
                 border-radius: 5px;
@@ -45,9 +45,10 @@ export const SearchArea = styled.div`
                 height: 40px;
                 padding: 0 20px;
                 cursor: pointer;
+                font-weight: bold;
                 transition: background-color 0.2s;
                 &:hover {
-                    background-color: var(--tertiary-hover);
+                    background-color: #d50039;
                 }
             }
         }
