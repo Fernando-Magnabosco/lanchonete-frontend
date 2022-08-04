@@ -40,13 +40,7 @@ export const Login = styled.div`
                 cursor: default;
             }
 
-<<<<<<< HEAD
             hr{
-=======
-            hr {
-                /* border-color: black; */
-                /* height: 1px; */
->>>>>>> b3270d5ca0671ab5784431e4df6ba496b729e331
                 border: 1px solid #000000;
                 width: 350px;
             }

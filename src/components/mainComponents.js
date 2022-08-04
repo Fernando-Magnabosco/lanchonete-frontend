@@ -14,14 +14,6 @@ export const PageTitle = styled.h1`
 export const PageBody = styled.div``;
 
 export const ErrorMessage = styled.div`
-<<<<<<< HEAD
     color: #FB0043;
     position: absolute;
-    
-    `;
-
-=======
-    color: #fb0043;
-    height: 2ch;
 `;
->>>>>>> b3270d5ca0671ab5784431e4df6ba496b729e331
