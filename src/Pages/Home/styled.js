@@ -154,11 +154,11 @@ export const PageArea = styled.div`
         font-size: 20px;
     }
 
-    .adList {
+    .productsList {
         display: flex;
         flex-wrap: wrap;
 
-        .aditem {
+        .productItem {
             width: 25%;
         }
     }

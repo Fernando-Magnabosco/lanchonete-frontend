@@ -77,7 +77,7 @@ export const Item = styled.div`
             background-color: rgba(0, 0, 0, 0.6);
             border-radius: 5px;
             width: calc(100% - 20px);
-            height: calc(100% - 60px);
+            height: calc(100% - 80px);
             top: 10px;
             left: 10px;
             z-index: 1;

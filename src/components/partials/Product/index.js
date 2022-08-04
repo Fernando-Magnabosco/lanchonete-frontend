@@ -1,27 +1,32 @@
 import React from "react";
 import { Item } from "./styled";
 import { Link } from "react-router-dom";
-// import olxAPI from "../../../helpers/olxAPI";
+import useApi from "../../../helpers/api";
 
 export default (props) => {
+    const api = useApi();
     return (
-        <Item className="product">
-            <Link className="itemLink">
-                {/* <div className="itemImage">
-                    <img src={props.ad.image} alt="" />
-                </div> */}
+        <Item className="productItem">
+            <Link className="itemLink" to="/">
+                <div className="itemImage">
+                    <img
+                        src={
+                            api.getApi() +
+                            "/media/" +
+                            props.product.images[0].url
+                        }
+                        alt=""
+                    />
+                </div>
 
-                <div className="itemName">{props.ad.title}</div>
+                <div className="itemName">{props.product.nm_produto}</div>
 
-                <div className="itemPrice">
-                    {props.ad.priceNegotiable
-                        ? "Preço Negociável"
-                        : "R$ " + props.ad.price}
+                <div className="itemPrice">{props.product.valor}</div>
+
+                <div className="itemDescription">
+                    {props.product.descricaoproduto}
                 </div>
             </Link>
-            <a className="to-ad" href={`/ad/${props.ad.id}`}>
-                Ver Mais
-            </a>
         </Item>
     );
 };
