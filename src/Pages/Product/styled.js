@@ -12,8 +12,7 @@ export const PageArea = styled.div`
 
 export const Login = styled.div`
     .container {
-        width: 420px;
-        height: 540px;
+        
         display: flex;
         
         flex-wrap: wrap;
@@ -25,7 +24,6 @@ export const Login = styled.div`
         border-width: 0.2px 2px 2px 0.2px;
         border-style: solid;
         border-color: #0D0D0D;
-        border-radius: 150px 0px;
 
         .area-title{
             height: fit-content;
@@ -41,6 +39,8 @@ export const Login = styled.div`
             }
 
             hr{
+                /* border-color: black; */
+                /* height: 1px; */
                 border: 1px solid #000000;
                 width: 350px ;
             }
