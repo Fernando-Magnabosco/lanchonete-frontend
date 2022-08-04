@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Product = styled.div`
+export const HeaderArea = styled.div`
     .cabecalho{
         height: 70px;
         background: #242424;

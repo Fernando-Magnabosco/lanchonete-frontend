@@ -10,7 +10,7 @@ export const PageArea = styled.div`
     background-color: var(--primary-color);
 `;
 
-export const Login = styled.div`
+export const Estilo = styled.div`
     .container {
         background: white;
 

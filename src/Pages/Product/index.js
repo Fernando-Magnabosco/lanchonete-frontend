@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import useApi from "../../helpers/api";
 
-<<<<<<< HEAD
+import { PageArea, Estilo } from "./styled";
 import { ErrorMessage } from "../../components/mainComponents";
-=======
-import { PageArea } from "./styled";
-import Header from "../../components/Header/index";
->>>>>>> 8b6f1748c3ad909c51fcc6f03fba13279b52c9c5
 
 // import { ErrorMessage } from "../../components/MainComponents";
 
 const Page = () => {
     return (
         <PageArea>
-            <Product>
+            <Estilo>
                 <div className="container-cadastro">
                     <h3>Cadastro de produto</h3>
                     <form>
@@ -37,7 +33,7 @@ const Page = () => {
                         <button>cadastrar</button>
                     </form>
                 </div>
-            </Product>
+            </Estilo>
         </PageArea>
     );
 };
