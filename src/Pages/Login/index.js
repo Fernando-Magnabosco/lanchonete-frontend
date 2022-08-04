@@ -20,7 +20,11 @@ const Page = () => {
         const json = await api.login(email, password);
 
         if (json.error) {
-            setError(json.error);
+            if (typeof json.error === "object") {
+                console.log(json.error);
+                if (json.error.email) setError(json.error.email.msg);
+                else if (json.error.password) setError(json.error.password.msg);
+            } else setError(json.error);
         } else {
             doLogin(json.token, rememberPassword);
             window.Location.href = "/home";
@@ -37,7 +41,7 @@ const Page = () => {
                         <hr />
                     </div>
 
-                    {error && <ErrorMessage>{error}</ErrorMessage>}
+                    {<ErrorMessage>{error}</ErrorMessage>}
 
                     <form onSubmit={handleSubmit}>
                         <label className="area">
