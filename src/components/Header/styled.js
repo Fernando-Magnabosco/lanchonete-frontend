@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const HeaderArea = styled.div`
     .cabecalho{
-        
-        width: 100%;
         height: 70px;
         background: #242424;
 
@@ -14,8 +12,6 @@ export const HeaderArea = styled.div`
         border-width: 0px 0px 2px 0px;
         border-style: solid;
         border-color: #0d0d0d;
-
-        position: absolute;
 
         a {
             text-decoration: none;
