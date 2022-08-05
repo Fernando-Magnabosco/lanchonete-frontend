@@ -67,6 +67,11 @@ export const Item = styled.div`
             font-size: 15px;
         }
 
+        .itemDescription {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         /* &:hover::before {
             content: "";
             display: flex;
