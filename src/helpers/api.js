@@ -10,7 +10,6 @@ const apiFetchFile = async (endpoint, body) => {
         if (token) body.append("token", token);
     }
 
-    console.log(body);
     const response = await fetch(
         BASEAPI + endpoint,
 
@@ -130,8 +129,8 @@ const API = {
         return json;
     },
 
-    getProducts: async () => {
-        const json = await apiFetchGet("/product/list");
+    getProducts: async (options) => {
+        const json = await apiFetchGet("/product/list", options);
         return json;
     },
 

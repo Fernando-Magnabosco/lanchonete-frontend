@@ -6,21 +6,53 @@ import { PageArea, SearchArea } from "./styled";
 
 import useApi from "../../helpers/api";
 
+const itemPerPage = 8;
+
 const Page = () => {
     const api = useApi();
+
     const [products, setProducts] = useState([]);
+    const [totalProducts, setTotalProducts] = useState(0);
+    const [pageCount, setPageCount] = useState(0);
+    const [opacity, setOpacity] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+
+    const getProducts = async () => {
+        setLoading(true);
+        let offset = (currentPage - 1) * itemPerPage;
+
+        const json = await api.getProducts({
+            limit: itemPerPage,
+            offset: offset,
+        });
+        setProducts(json.products);
+        setTotalProducts(json.total);
+        setOpacity(1);
+        setLoading(false);
+    };
 
     useEffect(() => {
-        const getProducts = async () => {
-            const json = await api.getProducts({
-                sort: "desc",
-                limit: 8,
-            });
-            console.log(json);
-            setProducts(json.products);
-        };
+        if (products.length === 0) {
+            setPageCount(0);
+            return;
+        }
+
+        setPageCount(Math.ceil(totalProducts / itemPerPage));
+
+        if (pageCount > 10) setPageCount(10);
+    }, [totalProducts]);
+
+    useEffect(() => {
+        setOpacity(0.3);
         getProducts();
-    }, []);
+    }, [currentPage]);
+
+    let pagination = [];
+
+    for (let i = 0; i < pageCount; i++) {
+        pagination.push(i + 1);
+    }
 
     return (
         <>
@@ -42,17 +74,57 @@ const Page = () => {
             <PageContainer>
                 <PageArea>
                     <h2>Produtos</h2>
+                    {loading && products.length === 0 && (
+                        <div className="loading"> Carregando... </div>
+                    )}
+
+                    {!loading && products.length === 0 && (
+                        <div className="loading">
+                            {" "}
+                            Nenhum produto encontrado{" "}
+                        </div>
+                    )}
+
                     <div className="productsList">
-                        {products.map((product) => (
-                            <ProductItem
-                                key={product.id_produto}
-                                product={product}
-                            />
+                        {products.map((product, index) => (
+                            <ProductItem key={index} product={product} />
                         ))}
                     </div>
-                    <Link to="/ads" className="seeAllAds">
-                        Ver todos
-                    </Link>
+
+                    {pageCount > 1 && (
+                        <div className="pagination">
+                            {pagination.map((page, index) => (
+                                <div
+                                    onClick={() => setCurrentPage(page)}
+                                    key={index}
+                                    className={
+                                        page === currentPage
+                                            ? "pageItem active"
+                                            : "pageItem"
+                                    }
+                                >
+                                    {page}
+                                </div>
+                            ))}
+
+                            <div
+                                onClick={() => {
+                                    if (currentPage < pageCount)
+                                        setCurrentPage(currentPage + 1);
+                                }}
+                                className={
+                                    "pageItem wide" +
+                                    (currentPage === pageCount
+                                        ? " disabled"
+                                        : "")
+                                }
+                            >
+                                {" "}
+                                Próxima Página{" "}
+                            </div>
+                        </div>
+                    )}
+
                     <hr />
                 </PageArea>
             </PageContainer>

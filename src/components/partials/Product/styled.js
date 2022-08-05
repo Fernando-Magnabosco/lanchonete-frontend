@@ -67,7 +67,7 @@ export const Item = styled.div`
             font-size: 15px;
         }
 
-        &:hover::before {
+        /* &:hover::before {
             content: "";
             display: flex;
             align-items: center;
@@ -81,7 +81,7 @@ export const Item = styled.div`
             top: 10px;
             left: 10px;
             z-index: 1;
-        }
+        } */
     }
 
     &::after {

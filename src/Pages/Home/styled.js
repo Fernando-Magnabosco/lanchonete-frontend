@@ -171,6 +171,48 @@ export const PageArea = styled.div`
         margin-top: 20px;
     }
 
+    .pagination {
+        --color-primary: #fb0043;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 10px;
+        .pageItem {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 1000;
+            background-color: white;
+            border-radius: 2px;
+            color: var(--color-primary);
+            margin: 2px;
+            border: 1px solid var(--color-primary);
+            cursor: pointer;
+            transition: background-color ease-in-out 0.2s;
+
+            &:hover,
+            &.active {
+                background-color: var(--color-primary);
+                color: white;
+            }
+
+            &.wide {
+                -webkit-user-select: none;
+                width: fit-content;
+                padding: 0 5px;
+            }
+            &.disabled {
+                background-color: #ccc;
+                border: 1px solid #ccc;
+                color: white;
+                cursor: default;
+            }
+        }
+    }
+
     @media (max-width: 768px) {
         & {
             margin: 10px;
