@@ -3,6 +3,14 @@ import { Item } from "./styled";
 import { Link } from "react-router-dom";
 import useApi from "../../../helpers/api";
 
+// const priceMask = createNumberMask({
+//     prefix: "R$ ",
+//     includeThousandsSeparator: true,
+//     thousandsSeparatorSymbol: ".",
+//     allowDecimal: true,
+//     decimalSymbol: ",",
+// });
+
 export default (props) => {
     const api = useApi();
     console.log(props.product);
@@ -22,7 +30,10 @@ export default (props) => {
 
                 <div className="itemName">{props.product.nm_produto}</div>
 
-                <div className="itemPrice">{props.product.valor}</div>
+                <div className="itemPrice">
+                    <span>R$ </span>
+                    {props.product.valor}
+                </div>
 
                 <div className="itemDescription">
                     {props.product.descricaoproduto}
