@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
@@ -10,12 +10,13 @@ import { ErrorMessage } from "../../components/mainComponents";
 
 const Page = () => {
     const api = useApi();
+    const fileField = useRef();
+    const navigate = useNavigate();
 
     const [categories, setCategories] = useState([]);
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [price, setPrice] = useState("");
-    const [priceNegtiable, setPriceNegtiable] = useState(false);
     const [desc, setDesc] = useState("");
 
     const [disabled, setDisabled] = useState(false);
@@ -30,6 +31,53 @@ const Page = () => {
         getCategories();
     }, []);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setDisabled(true);
+        setError("");
+        let errors = [];
+
+        if (!title.trim()) {
+            errors.push("Título é obrigatório");
+        }
+        if (!category) {
+            errors.push("Categoria é obrigatória");
+        }
+
+        if (errors.length !== 0) {
+            setError(errors.join("\n"));
+            setDisabled(false);
+            return;
+        }
+
+        const fData = new FormData();
+
+        fData.append("name", title);
+        fData.append("category", category);
+        fData.append("price", price);
+        fData.append("description", desc);
+        // fData.append("desc", desc);
+        if (fileField.current) {
+            if (fileField.current.files.length > 0) {
+                for (let i = 0; i < fileField.current.files.length; i++) {
+                    fData.append("img", fileField.current.files[i]);
+                }
+            }
+        }
+
+        const json = await api.addProduct(fData);
+        console.log(json);
+        if (!json.error) {
+            // navigate(`/ad/${json.id}`);
+            navigate("/");
+            return;
+        } else {
+            setError(json.error);
+        }
+
+        setDisabled(false);
+    };
+
     const priceMask = createNumberMask({
         prefix: "R$ ",
         includeThousandsSeparator: true,
@@ -43,7 +91,7 @@ const Page = () => {
             <Estilo>
                 <div className="container-cadastro">
                     <h2>Cadastro de produto</h2>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="area">
                             <h3>Nome:</h3>
                             <input
@@ -75,18 +123,34 @@ const Page = () => {
                         </div>
 
                         <div className="area">
+                            <h3>Descrição:</h3>
+                            <input
+                                className="desc"
+                                type="text"
+                                disabled={disabled}
+                                value={desc}
+                                onChange={(e) => setDesc(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="area">
                             <h3>Valor:</h3>
                             <MaskedInput
                                 mask={priceMask}
                                 placeholder="R$"
-                                disabled={disabled || priceNegtiable}
+                                disabled={disabled}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
                         </div>
 
                         <div className="area">
                             <h3>Imagem do produto:</h3>
-                            <input type="file" multiple />
+                            <input
+                                type="file"
+                                ref={fileField}
+                                disabled={disabled}
+                                multiple
+                            />
                         </div>
 
                         <button>cadastrar</button>

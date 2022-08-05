@@ -4,6 +4,33 @@ import { doLogout } from "./authHandler";
 // const BASEAPI = "http://192.168.129.122:5000";
 const BASEAPI = "http://localhost:5000";
 
+const apiFetchFile = async (endpoint, body) => {
+    if (!body.token) {
+        const token = Cookies.get("token");
+        if (token) body.append("token", token);
+    }
+
+    console.log(body);
+    const response = await fetch(
+        BASEAPI + endpoint,
+
+        {
+            method: "POST",
+            body,
+        }
+    );
+
+    const json = await response.json();
+
+    if (json.notallowed) {
+        doLogout();
+        window.location.href = "/signin";
+        return;
+    }
+
+    return json;
+};
+
 const apiFetchPost = async (endpoint, body) => {
     if (!body.token) {
         const token = Cookies.get("token");
@@ -118,13 +145,8 @@ const API = {
         return json;
     },
 
-    addProduct: async (name, price, description, category) => {
-        const json = await apiFetchPost("/product/add", {
-            name,
-            price,
-            description,
-            category,
-        });
+    addProduct: async (fData) => {
+        const json = await apiFetchFile("/product/add", fData);
         return json;
     },
 

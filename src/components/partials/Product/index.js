@@ -5,16 +5,17 @@ import useApi from "../../../helpers/api";
 
 export default (props) => {
     const api = useApi();
+    console.log(props.product);
     return (
         <Item className="productItem">
             <Link className="itemLink" to="/">
                 <div className="itemImage">
                     <img
-                        src={
-                            api.getApi() +
-                            "/media/" +
-                            props.product.images[0].url
-                        }
+                        src={`${api.getApi()}/media/${
+                            props.product.images.length > 0
+                                ? props.product.images[0].url
+                                : ""
+                        }`}
                         alt=""
                     />
                 </div>
