@@ -50,7 +50,9 @@ const Page = () => {
                                 )}
                                 )}
                             </Carousel>
+                        
                         }
+                        {!product.images && <Fake height={300}/>}
                     </div>
                     <div className="productInfo">
                         <div className="name">

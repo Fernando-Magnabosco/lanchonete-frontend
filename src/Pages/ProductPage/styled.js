@@ -66,6 +66,8 @@ justify-content: center;
 
         .productDesc{
 
+            padding-right: 20px;
+            flex-wrap: wrap;
             small {
                 color: #999;
             }
