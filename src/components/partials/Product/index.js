@@ -13,10 +13,13 @@ import useApi from "../../../helpers/api";
 
 export default (props) => {
     const api = useApi();
-    console.log(props.product);
+
     return (
         <Item className="productItem">
-            <Link className="itemLink" to="/">
+            <Link
+                className="itemLink"
+                to={`/product/${props.product.id_produto}`}
+            >
                 <div className="itemImage">
                     <img
                         src={`${api.getApi()}/media/${
