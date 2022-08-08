@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import Carousel from 'react-material-ui-carousel';
+import Carousel from "react-material-ui-carousel";
 
 import { PageArea, Fake } from "./styled";
 
@@ -14,8 +14,7 @@ const Page = () => {
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState([]);
 
-    useEffect(() => {           
-
+    useEffect(() => {
         const getProduct = async (id) => {
             const product = await api.getProduct(id);
             setProduct(product);
@@ -30,52 +29,55 @@ const Page = () => {
     }, [id]);
 
     return (
-            <PageArea>
-                <div className="leftSide">
+        <PageArea>
+            <div className="leftSide">
                 <div className="box">
                     <div className="productImage">
-                        {loading && <Fake height={300}/>}
-                        {product.images && 
+                        {loading && <Fake height={300} />}
+                        {product.images && (
                             <Carousel indicators={false}>
-                                {product.images.map((img,k) => {
-                                    return(
-                                    <div key={k} className="each-slide">
-                                        <img
-                                            src={`${api.getApi()}/media/${
+                                {product.images.map((img, k) => {
+                                    return (
+                                        <div key={k} className="each-slide">
+                                            <img
+                                                src={`${api.getApi()}/media/${
                                                     img.url
-                                            }`}
-                                            alt=""
-                                        />
-                                    </div>
-                                )}
-                                )}
+                                                }`}
+                                                alt=""
+                                            />
+                                        </div>
+                                    );
+                                })}
                             </Carousel>
-                        
-                        }
-                        {!product.images && <Fake height={300}/>}
+                        )}
+                        {!product.images && <Fake height={300} />}
                     </div>
                     <div className="productInfo">
                         <div className="name">
-                            {loading && <Fake height={20}/>}
+                            {loading && <Fake height={20} />}
 
                             <h2>{product.nm_produto}</h2>
                         </div>
-                        {loading && <Fake height={20}/>}
-                    <div className="price">Preço: <span><b>R$ {product.valor}</b></span></div>
+                        {loading && <Fake height={20} />}
+                        <div className="price">
+                            Preço:{" "}
+                            <span>
+                                <b>R$ {product.valor}</b>
+                            </span>
+                        </div>
                         <div className="productDesc">
-                        {loading && <Fake height={100} />}        
-                                <br/>
-                                {product.descricaoproduto}                    
-                                <hr/>
-                                {product.views && 
-                                    <small>Visualizações : {product.views}</small>
-                                }
+                            {loading && <Fake height={100} />}
+                            <br />
+                            <p>{product.descricaoproduto} </p>
+                            <hr />
+                            {product.views && (
+                                <small>Visualizações : {product.views}</small>
+                            )}
                         </div>
                     </div>
-
                 </div>
             </div>
-            </PageArea>
+        </PageArea>
     );
 };
 

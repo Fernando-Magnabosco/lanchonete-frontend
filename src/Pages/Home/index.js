@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import ProductItem from "../../components/partials/Product";
 import { PageContainer } from "../../components/mainComponents";
 import { PageArea, SearchArea } from "./styled";
@@ -18,6 +18,11 @@ const Page = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
 
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+
+    const q = searchParams.get("q");
+
     const getProducts = async () => {
         setLoading(true);
         let offset = (currentPage - 1) * itemPerPage;
@@ -25,9 +30,10 @@ const Page = () => {
         const json = await api.getProducts({
             limit: itemPerPage,
             offset: offset,
+            q: q,
         });
         setProducts(json.products);
-        setTotalProducts(json.total);
+        setTotalProducts(json.products.length);
         setOpacity(1);
         setLoading(false);
     };
@@ -46,7 +52,7 @@ const Page = () => {
     useEffect(() => {
         setOpacity(0.3);
         getProducts();
-    }, [currentPage]);
+    }, [currentPage, location]);
 
     let pagination = [];
 

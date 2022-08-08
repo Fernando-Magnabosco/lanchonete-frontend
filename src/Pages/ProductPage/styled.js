@@ -1,57 +1,55 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Fake = styled.div`
-    background-color: #DDD;
-    height: ${props=>props.height || 20}px;
+    background-color: #ddd;
+    height: ${(props) => props.height || 20}px;
 `;
 
 export const PageArea = styled.div`
-display: flex;
-margin-top: 20px;
-width:100vw;
-justify-content: center;
+    display: flex;
+    margin-top: 20px;
+    width: 100vw;
+    justify-content: center;
 
-
-.box {
-    background-color: #FFF;
-    border-radius: 5px;
-    box-shadow: 0px 0px 4px #999;
-    margin-bottom: 20px;
-    width: 600px;
-    height: 480px;
-}
-
-.box--padding {
-    padding: 10px;
-}
-
-.leftSide {
-    margin: auto;
-
-    .box{
-        display: flex;
+    .box {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 4px #999;
+        margin-bottom: 20px;
+        width: 600px;
+        height: 480px;
     }
 
-    .productImage{
+    .box--padding {
+        padding: 10px;
+    }
 
-        width: 320px;
-        height:320px;
-        margin-right:20px;
+    .leftSide {
+        margin: auto;
 
-        .each-slide img {
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            background-size:Cover;
-            height:320px;
+        .box {
+            display: flex;
+        }
+
+        .productImage {
+            width: 320px;
+            height: 320px;
+            margin-right: 20px;
+
+            .each-slide img {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-size: Cover;
+                height: 320px;
+            }
         }
     }
-}
 
     .productInfo {
         flex: 1;
 
-        .name{
+        .name {
             margin-bottom: 20px;
 
             h2 {
@@ -64,10 +62,14 @@ justify-content: center;
             }
         }
 
-        .productDesc{
-
+        .productDesc {
             padding-right: 20px;
-            flex-wrap: wrap;
+
+            p {
+                word-wrap: break-word;
+                text-overflow: ellipsis;
+                width: 200px;
+            }
             small {
                 color: #999;
             }
