@@ -5,7 +5,7 @@ import createNumberMask from "text-mask-addons/dist/createNumberMask";
 
 import useApi from "../../helpers/api";
 
-import { PageArea, Estilo } from "./styled";
+import { PageArea } from "./styled";
 import { ErrorMessage } from "../../components/mainComponents";
 
 const Page = () => {
@@ -66,7 +66,7 @@ const Page = () => {
         }
 
         const json = await api.addProduct(fData);
-        console.log(json);
+
         if (!json.error) {
             // navigate(`/ad/${json.id}`);
             navigate("/");
@@ -88,11 +88,11 @@ const Page = () => {
 
     return (
         <PageArea>
-            <Estilo>
-                <div className="container-cadastro">
-                    <h2>Cadastro de produto</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="area">
+            <div className="container-cadastro">
+                <h2>Cadastro de produto</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="area">
+                        <label>
                             <h3>Nome:</h3>
                             <input
                                 type="text"
@@ -100,9 +100,11 @@ const Page = () => {
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
-                        </div>
+                        </label>
+                    </div>
 
-                        <div className="area">
+                    <div className="area">
+                        <label>
                             <h3>Categoria:</h3>
                             <select
                                 disabled={disabled}
@@ -120,9 +122,11 @@ const Page = () => {
                                         </option>
                                     ))}
                             </select>
-                        </div>
+                        </label>
+                    </div>
 
-                        <div className="area">
+                    <div className="area">
+                        <label>
                             <h3>Descrição:</h3>
                             <input
                                 className="desc"
@@ -131,32 +135,38 @@ const Page = () => {
                                 value={desc}
                                 onChange={(e) => setDesc(e.target.value)}
                             />
-                        </div>
+                        </label>
+                    </div>
 
-                        <div className="area">
-                            <h3>Valor:</h3>
+                    <div className="area">
+                        <label>
+                            <h3>Preço:</h3>
                             <MaskedInput
                                 mask={priceMask}
                                 placeholder="R$"
                                 disabled={disabled}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
-                        </div>
+                        </label>
+                    </div>
 
-                        <div className="area">
-                            <h3>Imagem do produto:</h3>
+                    <div className="area">
+                        <label>
+                            <h3>Imagens:</h3>
                             <input
                                 type="file"
                                 ref={fileField}
                                 disabled={disabled}
                                 multiple
                             />
-                        </div>
+                        </label>
+                    </div>
 
+                    <div className="area">
                         <button>cadastrar</button>
-                    </form>
-                </div>
-            </Estilo>
+                    </div>
+                </form>
+            </div>
         </PageArea>
     );
 };

@@ -14,7 +14,7 @@ const Page = () => {
     const [products, setProducts] = useState([]);
     const [totalProducts, setTotalProducts] = useState(0);
     const [pageCount, setPageCount] = useState(0);
-    const [opacity, setOpacity] = useState(1);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
 
@@ -33,8 +33,10 @@ const Page = () => {
             q: q,
         });
         setProducts(json.products);
-        setTotalProducts(json.products.length);
-        setOpacity(1);
+
+        if (q) setTotalProducts(json.products.length);
+        else setTotalProducts(json.total);
+
         setLoading(false);
     };
 
@@ -50,7 +52,6 @@ const Page = () => {
     }, [totalProducts]);
 
     useEffect(() => {
-        setOpacity(0.3);
         getProducts();
     }, [currentPage, location]);
 

@@ -4,6 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 
 import { isLogged, doLogout } from "../../../helpers/authHandler";
 
+import DropdownComponent from "../Dropdown";
+
 const Header = (props) => {
     const [logged, setLogged] = useState(isLogged());
 
@@ -27,21 +29,26 @@ const Header = (props) => {
                             {logged && (
                                 <>
                                     <li>
-                                        <Link to="/product/add">
-                                            adicionar produto
-                                        </Link>
+                                        <DropdownComponent placeholder="adicionar...">
+                                            <li>
+                                                <Link to="/product/add">
+                                                    produto
+                                                </Link>
+                                            </li>
+                                        </DropdownComponent>
                                     </li>
-                                    <li>
-                                        <button onClick={handleLogout}>
-                                            sair
-                                        </button>
+                                    <li
+                                        className="button"
+                                        onClick={handleLogout}
+                                    >
+                                        <span>sair</span>
                                     </li>
                                 </>
                             )}
 
                             {!logged && (
                                 <>
-                                    <li>
+                                    <li className="button">
                                         <Link to="/login">login</Link>
                                     </li>
                                 </>

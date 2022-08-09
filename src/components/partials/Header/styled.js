@@ -4,7 +4,6 @@ export const HeaderArea = styled.div`
     background-color: #141414;
 
     height: 50px;
-    border-bottom: 1px solid #ccc;
 
     .container {
         display: flex;
@@ -39,35 +38,26 @@ export const HeaderArea = styled.div`
             height: 40px;
         }
         li {
-            margin-left: 20px;
-            margin-right: 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
+            cursor: pointer;
             a,
-            button {
+            span {
                 color: #fb0043;
                 font-size: 18px;
                 border: 0;
                 background: none;
                 cursor: pointer;
                 outline: none;
-
-                transition: color 0.2s ease-in-out;
-
-                &:hover {
-                    color: #555;
-                }
-                &.button {
-                    transition: background-color 0.2s ease-in-out;
-                    background-color: var(--color-secondary);
-                    border: 2px solid var(--color-secondary);
-                    border-radius: 4px;
-                    color: white;
-                    padding: 5px 5px;
-                }
-                &.button:hover {
-                    background-color: var(--secondary-hover);
-                    border: 2px solid var(--secondary-hover);
-                }
+            }
+        }
+        .button {
+            width: 100px;
+            &:hover {
+                background-color: #242424;
             }
         }
     }

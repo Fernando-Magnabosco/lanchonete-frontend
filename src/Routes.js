@@ -16,11 +16,11 @@ export default () => {
             <Route path="/login" element={<Login />} />
 
             <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/*" element={<NotFound />} />
             <Route
                 path="/product/add"
                 element={<Private component={newProduct} />}
             />
+            <Route path="/*" element={<NotFound />} />
         </Routes>
     );
 };
