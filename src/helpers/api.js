@@ -149,6 +149,11 @@ const API = {
         return json;
     },
 
+    addIngredient: async (name) => {
+        const json = await apiFetchPost("/ingredient/add", { name });
+        return json;
+    },
+
     getCategories: async () => {
         const json = await apiFetchGet("/category/list");
         return json;

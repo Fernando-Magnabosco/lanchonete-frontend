@@ -3,29 +3,23 @@ import { DropdownStyle } from "./styled";
 
 const DropdownComponent = (props) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [style, setStyle] = useState({ display: "none" });
 
     useEffect(() => {
         const toggleDropdown = () => {
-            const dropdownContent = document.getElementById("dropdown-content");
-            dropdownContent.style.display = isOpen ? "block" : "none";
+            setStyle({ display: isOpen ? "block" : "none" });
         };
 
         toggleDropdown();
-        document.addEventListener("mousedown", handleClickOutside);
+
+        const timeOut = setTimeout(() => {
+            setStyle({ display: "none" });
+        }, 4000);
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            clearTimeout(timeOut);
         };
     }, [isOpen]);
-
-    const handleClickOutside = (e) => {
-        if (isOpen) {
-            const dropdownContent = document.getElementById("dropdown-content");
-            if (!dropdownContent.contains(e.target)) {
-                setIsOpen(false);
-            }
-        }
-    };
 
     return (
         <DropdownStyle
@@ -34,7 +28,9 @@ const DropdownComponent = (props) => {
             }}
         >
             <span className="placeholder">{props.placeholder}</span>
-            <ul id="dropdown-content">{props.children}</ul>
+            <ul style={style} id="dropdown-content">
+                {props.children}
+            </ul>
         </DropdownStyle>
     );
 };

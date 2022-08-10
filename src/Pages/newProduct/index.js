@@ -164,6 +164,10 @@ const Page = () => {
                     <div className="area">
                         <button>cadastrar</button>
                     </div>
+
+                    <div className="area">
+                        {error && <ErrorMessage>{error}</ErrorMessage>}
+                    </div>
                 </form>
             </div>
         </PageArea>
