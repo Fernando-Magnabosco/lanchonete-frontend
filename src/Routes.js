@@ -24,6 +24,12 @@ export default () => {
                 path="/product/add"
                 element={<Private component={newProduct} />}
             />
+            <Route 
+                path="/category/add/" 
+                element={<Private component={AddCategory}/>} 
+            />
+
+
             <Route path="/*" element={<NotFound />} />
         </Routes>
     );

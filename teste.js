@@ -1,10 +1,5 @@
-<div className="area">
-    <h3>Ingredientes:</h3>
-    <input
-        className="desc"
-        type="text"
-        disabled={disabled}
-        value={desc}
-        onChange={(e) => setDesc(e.target.value)}
-    />
-</div>
+Telas de cadastro:
+	Anthoy - Categoria
+	Anthoy - caixa na tela de cadastro de produtp,IgredienteProduto
+	Fernando - Usuario
+	Fernando - ingrediente
