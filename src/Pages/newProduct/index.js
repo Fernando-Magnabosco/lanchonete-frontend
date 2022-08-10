@@ -25,7 +25,6 @@ const Page = () => {
     useEffect(() => {
         const getCategories = async () => {
             const cats = await api.getCategories();
-            console.log(cats);
             setCategories(cats.categories);
         };
         getCategories();

@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const PageArea = styled.div`
     background: #242424;
-
     padding: 20px;
+    
     .container-cadastro {
         width: 1000px;
         height: calc(95vh - 50px);
