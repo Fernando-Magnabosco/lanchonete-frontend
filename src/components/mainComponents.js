@@ -14,10 +14,11 @@ export const PageTitle = styled.h1`
 export const PageBody = styled.div``;
 
 export const ErrorMessage = styled.div`
-    color: #FB0043;
+    color: #fb0043;
+    font-weight: 800;
 `;
 
 export const Fake = styled.div`
-    background-color: #DDD;
-    height: ${props=>props.height || 20}px;
+    background-color: #ddd;
+    height: ${(props) => props.height || 20}px;
 `;

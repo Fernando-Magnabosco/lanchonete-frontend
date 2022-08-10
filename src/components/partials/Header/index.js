@@ -29,10 +29,40 @@ const Header = (props) => {
                             {logged && (
                                 <>
                                     <li>
+                                        <DropdownComponent placeholder="atualizar...">
+                                            <li>
+                                                <Link to="/product/update">
+                                                    produto
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/category/update">
+                                                    categoria
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/ingredient/update">
+                                                    ingrediente
+                                                </Link>
+                                            </li>
+                                        </DropdownComponent>
+                                    </li>
+
+                                    <li>
                                         <DropdownComponent placeholder="adicionar...">
                                             <li>
                                                 <Link to="/product/add">
                                                     produto
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/category/add">
+                                                    categoria
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/ingredient/add">
+                                                    ingrediente
                                                 </Link>
                                             </li>
                                         </DropdownComponent>
@@ -50,6 +80,9 @@ const Header = (props) => {
                                 <>
                                     <li className="button">
                                         <Link to="/login">login</Link>
+                                    </li>
+                                    <li className="button">
+                                        <Link to="/signup">cadastrar</Link>
                                     </li>
                                 </>
                             )}
