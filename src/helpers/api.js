@@ -154,6 +154,11 @@ const API = {
         return json;
     },
 
+    addCategory: async (name) => {
+        const json = await apiFetchPost("/category/add", { name });
+        return json;
+    },
+
     getCategories: async () => {
         const json = await apiFetchGet("/category/list");
         return json;
