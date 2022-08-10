@@ -22,7 +22,7 @@ export default () => {
                 element={<Private component={newProduct} />}
             />
             <Route 
-                path="/category/add/" 
+                path="/category/add" 
                 element={<Private component={AddCategory}/>} 
             />
 
