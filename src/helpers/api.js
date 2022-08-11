@@ -164,6 +164,11 @@ const API = {
         return json;
     },
 
+    getIngredient: async () => {
+        const json = await apiFetchGet("/ingredient/list");
+        return json;
+    },
+
     getApi: () => {
         return BASEAPI;
     },

@@ -24,11 +24,22 @@ const Page = () => {
     const [categories, setCategories] = useState([]);
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
+    const [Ingredients, setIngredients] = useState("");
     const [price, setPrice] = useState("");
     const [desc, setDesc] = useState("");
 
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState("");
+
+
+    useEffect(() => {
+        const getIngredient = async () => {
+            const ingre = await api.getIngredient();
+            console.log(ingre);
+            setIngredients(ingre.Ingredients);
+        }
+        getIngredient();
+    }, []);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -209,7 +220,7 @@ const Page = () => {
                             renderValue={(selected) => selected.join(', ')}
                             MenuProps={MenuProps}
                             >
-                            {names.map((name) => (
+                            {Ingredients.map((name) => (
                                 <MenuItem key={name} value={name}>
                                 <Checkbox checked={personName.indexOf(name) > -1} />
                                 <ListItemText primary={name} />
