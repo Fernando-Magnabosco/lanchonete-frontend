@@ -30,11 +30,7 @@ const Header = (props) => {
                                 <>
                                     <li>
                                         <DropdownComponent placeholder="atualizar...">
-                                            <li>
-                                                <Link to="/product/update">
-                                                    produto
-                                                </Link>
-                                            </li>
+
                                             <li>
                                                 <Link to="/category/update">
                                                     categoria
