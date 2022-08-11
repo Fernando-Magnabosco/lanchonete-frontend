@@ -159,6 +159,22 @@ const API = {
         return json;
     },
 
+    getIngredients: async () => {
+        const json = await apiFetchGet("/ingredient/list");
+        return json;
+    },
+
+    updateCategory: async (id, name) => {
+        const json = await apiFetchPut(`/category/${id}`, { name });
+        return json;
+    },
+
+    toggleCategory: async (id) => {
+        const json = await apiFetchPost("/category/toggle", { id });
+
+        return json;
+    },
+
     getApi: () => {
         return BASEAPI;
     },

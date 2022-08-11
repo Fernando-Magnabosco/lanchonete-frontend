@@ -13,31 +13,21 @@ const Page = () => {
 
     const [name, setName] = useState("");
 
-    const [categories, setCategories] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
     const [ID, setID] = useState("");
-    const [category, setCategory] = useState({});
 
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {
-        const getCategories = async () => {
-            const json = await api.getCategories();
+        const getIngredients = async () => {
+            const json = await api.getIngredients();
             if (!json.error) {
-                setCategories(json.categories);
+                setIngredients(json.ingredientes);
             }
         };
-        getCategories();
+        getIngredients();
     }, []);
-
-    useEffect(() => {
-        for (const cat of categories) {
-            if (cat.id_categoria == ID) {
-                setCategory(cat);
-                break;
-            }
-        }
-    }, [ID]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,7 +40,7 @@ const Page = () => {
             setDisabled(false);
             return;
         }
-        const json = await api.updateCategory(ID, name);
+        const json = await api.updateIngredient(ID, name);
 
         if (!json.error) {
             navigate("/");
@@ -62,46 +52,22 @@ const Page = () => {
         setDisabled(false);
     };
 
-    const toggleCat = async () => {
-        setDisabled(true);
-        setError("");
-
-        const json = await api.toggleCategory(ID);
-
-        if (!json.error) {
-            setDisabled(false);
-            for (let cat of categories) {
-                if (cat.id_categoria == ID) {
-                    cat.flsituacao = !cat.flsituacao;
-                    setCategory(cat);
-                    break;
-                }
-            }
-
-            // window.location.reload();
-            return;
-        } else {
-            setError(json.error);
-        }
-        setDisabled(false);
-    };
-
     return (
         <PageArea>
             <div className="container-cadastro">
-                <h2>Atualizar categoria</h2>
+                <h2>Atualizar ingrediente</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="area">
                         <label>
-                            <h3>Categoria:</h3>
+                            <h3>Ingrediente:</h3>
                             <select onChange={(e) => setID(e.target.value)}>
                                 <option value="">Selecione</option>
-                                {categories.map((cat) => (
+                                {ingredients.map((ingredient) => (
                                     <option
-                                        key={cat.id_categoria}
-                                        value={cat.id_categoria}
+                                        key={ingredient.id_ingrediente}
+                                        value={ingredient.id_ingrediente}
                                     >
-                                        {cat.nm_categoria}
+                                        {ingredient.nm_ingrediente}
                                     </option>
                                 ))}
                             </select>
@@ -121,16 +87,6 @@ const Page = () => {
 
                     <div className="area">
                         <button disabled={disabled}>alterar nome</button>
-                    </div>
-
-                    <div className="area">
-                        <button
-                            disabled={disabled}
-                            type="button"
-                            onClick={toggleCat}
-                        >
-                            {category.flsituacao ? "desativar" : "ativar"}
-                        </button>
                     </div>
 
                     <div className="area">
