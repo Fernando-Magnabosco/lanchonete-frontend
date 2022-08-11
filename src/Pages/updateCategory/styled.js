@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const PageArea = styled.div`
-    padding: 20px;
     background: #242424;
 
-    .container-cadastro{
+    padding: 20px;
+    .container-cadastro {
         width: 1000px;
         height: calc(95vh - 50px);
         margin: auto;
@@ -15,17 +15,15 @@ export const PageArea = styled.div`
         font-family: "Inter", sans-serif;
         color: #fb0043;
 
-        form{
+        form {
             margin-top: 20px;
-            
-
-            .area{
+            .area {
                 padding: 10px 0px 10px 45px;
+                display: inline-block;
                 width: 400px;
             }
-            
-            button{ 
-                margin-left: 45px;
+
+            button {
                 width: 350px;
                 height: 50px;
 
@@ -46,8 +44,9 @@ export const PageArea = styled.div`
                     border-color: #fb0043;
                 }
             }
-            
-            input{
+
+            input,
+            select {
                 padding: 10px;
                 height: 50px;
                 width: 350px;
@@ -63,8 +62,11 @@ export const PageArea = styled.div`
                     border-color: #fb0043;
                 }
             }
+
+            input::placeholder {
+                font-style: italic;
+                font-weight: 200;
+            }
         }
-
     }
-
 `;

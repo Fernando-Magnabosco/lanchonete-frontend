@@ -4,6 +4,7 @@ import Carousel from "react-material-ui-carousel";
 
 import { PageArea, Fake } from "./styled";
 
+import { isLogged } from "../../helpers/authHandler";
 import useApi from "../../helpers/api";
 
 const Page = () => {
@@ -58,6 +59,7 @@ const Page = () => {
 
                             <h2>{product.nm_produto}</h2>
                         </div>
+
                         {loading && <Fake height={20} />}
                         <div className="price">
                             Preço:{" "}
@@ -74,6 +76,9 @@ const Page = () => {
                                 <small>Visualizações : {product.views}</small>
                             )}
                         </div>
+                        {isLogged() && (
+                            <Link to={`/product/edit/${id}`}> editar </Link>
+                        )}
                     </div>
                 </div>
             </div>

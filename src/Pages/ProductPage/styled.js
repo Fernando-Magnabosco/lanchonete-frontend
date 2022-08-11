@@ -74,5 +74,13 @@ export const PageArea = styled.div`
                 color: #999;
             }
         }
+
+        a {
+            color: #fb0043;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 `;
