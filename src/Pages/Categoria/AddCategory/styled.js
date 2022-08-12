@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const PageArea = styled.div`
-    background: #242424;
     padding: 20px;
-    
-    .container-cadastro {
+    background: #242424;
+
+    .container-cadastro{
         width: 1000px;
         height: calc(95vh - 50px);
         margin: auto;
@@ -15,17 +15,17 @@ export const PageArea = styled.div`
         font-family: "Inter", sans-serif;
         color: #fb0043;
 
-        form {
+        form{
             margin-top: 20px;
-            .area {
-                padding: 10px 0px 10px 45px;
-                display: inline-block;
-                width: 400px;
-                height: 90px;
             
-            }
 
-            button {
+            .area{
+                padding: 10px 0px 10px 45px;
+                width: 400px;
+            }
+            
+            button{ 
+                margin-left: 45px;
                 width: 350px;
                 height: 50px;
 
@@ -46,10 +46,8 @@ export const PageArea = styled.div`
                     border-color: #fb0043;
                 }
             }
-
-            input,
-            select,
-            MaskedInput {
+            
+            input{
                 padding: 10px;
                 height: 50px;
                 width: 350px;
@@ -65,24 +63,8 @@ export const PageArea = styled.div`
                     border-color: #fb0043;
                 }
             }
-
-            .selectIngredient{
-                
-                
-                padding: 10px;
-                height: 50px;
-                width: 350px;
-                border: 1px solid #141414;
-                background: #242424;
-                outline: none;
-                color: #fb0043;
-                border-radius: 0;
-            }
-
-            input::placeholder {
-                font-style: italic;
-                font-weight: 200;
-            }
         }
+
     }
+
 `;

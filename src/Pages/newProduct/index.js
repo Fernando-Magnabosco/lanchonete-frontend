@@ -24,7 +24,7 @@ const Page = () => {
     const [categories, setCategories] = useState([]);
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
-    const [Ingredients, setIngredients] = useState("");
+    const [Ingredients, setIngredients] = useState([]);
     const [price, setPrice] = useState("");
     const [desc, setDesc] = useState("");
 
@@ -34,9 +34,9 @@ const Page = () => {
 
     useEffect(() => {
         const getIngredient = async () => {
-            const ingre = await api.getIngredient();
-            console.log(ingre);
-            setIngredients(ingre.Ingredients);
+            const ingre = await api.getIngredients();
+            setIngredients(ingre.ingredientes);
+            console.log(ingre.ingredientes);
         }
         getIngredient();
     }, []);
@@ -74,6 +74,8 @@ const Page = () => {
         fData.append("category", category);
         fData.append("price", price);
         fData.append("description", desc);
+        console.log(selectIngredients)
+        fData.append("ingredients",JSON.stringify(selectIngredients));
         // fData.append("desc", desc);
         if (fileField.current) {
             if (fileField.current.files.length > 0) {
@@ -96,8 +98,6 @@ const Page = () => {
         setDisabled(false);
     };
 
-    const names = [];
-
     const priceMask = createNumberMask({
         prefix: "R$ ",
         includeThousandsSeparator: true,
@@ -118,16 +118,17 @@ const Page = () => {
     };
 
     
-    const [personName, setPersonName] = useState([]);
+    const [selectIngredients, setSelectIngredients] = useState([]);
     
     const handleChange = (event) => {
         const {
-        target: { value },
+            target: { value },
         } = event;
-        setPersonName(
-        // On autofill we get a stringified value.
-        typeof value === 'string' ? value.split(',') : value,
-        );
+        setSelectIngredients(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value,
+            );
+        
     };
     
 
@@ -207,27 +208,42 @@ const Page = () => {
                         </label>
                     </div>
 
-                    <div>
-                        <FormControl sx={{ m: 1, width: 300 }}>
-                            <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
-                            <Select
-                            labelId="demo-multiple-checkbox-label"
-                            id="demo-multiple-checkbox"
-                            multiple
-                            value={personName}
-                            onChange={handleChange}
-                            input={<OutlinedInput label="Tag" />}
-                            renderValue={(selected) => selected.join(', ')}
-                            MenuProps={MenuProps}
-                            >
-                            {Ingredients.map((name) => (
-                                <MenuItem key={name} value={name}>
-                                <Checkbox checked={personName.indexOf(name) > -1} />
-                                <ListItemText primary={name} />
-                                </MenuItem>
-                            ))}
-                            </Select>
-                        </FormControl>
+                    <div className="area">
+                        <label>
+                            <h3>Ingredientes:</h3>
+
+                            
+                                
+                                <Select className="selectIngredient"
+                                labelId="demo-multiple-checkbox-label"
+                                id="demo-multiple-checkbox"
+                                multiple
+                                value={selectIngredients}
+                                onChange={handleChange}
+                                input={<OutlinedInput />}
+                                // selected.join(', ')
+                                renderValue={(selected) => {
+                                    let names = [];
+                                    
+                                    for(const ingredient of Ingredients) 
+                                        if(selected.includes(ingredient.id_ingrediente))
+                                            names.push(ingredient.nm_ingrediente);
+                                    return names.join(', ');
+                                }}
+                                MenuProps={MenuProps}
+                                >
+                                {Ingredients.map((ingredient) => (
+                                    <MenuItem key={ingredient.id_ingrediente} value={ingredient.id_ingrediente}>
+                                    <Checkbox checked={selectIngredients.includes(ingredient.id_ingrediente)} />
+                                    <ListItemText primary={ingredient.nm_ingrediente}/>
+                                    </MenuItem>
+                                )
+                                
+                                )}
+                        
+                                </Select>
+                            
+                        </label>
                     </div>
 
                     <div className="area">
