@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 
 import useApi from "../../../helpers/api";
 
@@ -8,8 +7,6 @@ import { ErrorMessage } from "../../../components/mainComponents";
 
 const Page = () => {
     const api = useApi();
-
-    const navigate = useNavigate();
 
     const [name, setName] = useState("");
 
@@ -31,8 +28,7 @@ const Page = () => {
         const json = await api.addIngredient(name);
 
         if (!json.error) {
-            navigate("/");
-            return;
+            window.location.reload();
         } else {
             setError(json.error);
         }

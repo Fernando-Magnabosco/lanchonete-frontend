@@ -53,7 +53,7 @@ const Page = () => {
         const json = await api.updateCategory(ID, name);
 
         if (!json.error) {
-            navigate("/");
+            window.location.reload();
             return;
         } else {
             setError(json.error);
