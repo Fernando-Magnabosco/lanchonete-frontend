@@ -154,16 +154,27 @@ const API = {
         return json;
     },
 
+    addCategory: async (name) => {
+        const json = await apiFetchPost("/category/add", { name });
+        return json;
+    },
+
     getCategories: async () => {
         const json = await apiFetchGet("/category/list");
         return json;
     },
 
+<<<<<<< HEAD
+    getIngredient: async () => {
+=======
     getIngredients: async () => {
+>>>>>>> e7f7fc95ef7646225647eb99be64f3215b84d842
         const json = await apiFetchGet("/ingredient/list");
         return json;
     },
 
+<<<<<<< HEAD
+=======
     updateCategory: async (id, name) => {
         const json = await apiFetchPut(`/category/${id}`, { name });
         return json;
@@ -180,6 +191,7 @@ const API = {
         return json;
     },
 
+>>>>>>> e7f7fc95ef7646225647eb99be64f3215b84d842
     getApi: () => {
         return BASEAPI;
     },
