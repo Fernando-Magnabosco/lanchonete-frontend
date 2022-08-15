@@ -45,6 +45,7 @@ const Page = () => {
                         <label>
                             <h3>Nome:</h3>
                             <input
+                                autoFocus
                                 type="text"
                                 disabled={disabled}
                                 value={name}
