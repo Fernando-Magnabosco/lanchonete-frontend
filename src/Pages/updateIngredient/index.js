@@ -43,8 +43,7 @@ const Page = () => {
         const json = await api.updateIngredient(ID, name);
 
         if (!json.error) {
-            navigate("/");
-            return;
+            window.location.reload();
         } else {
             setError(json.error);
         }
