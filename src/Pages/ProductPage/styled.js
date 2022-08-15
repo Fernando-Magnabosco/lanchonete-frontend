@@ -83,4 +83,16 @@ export const PageArea = styled.div`
             }
         }
     }
+
+    .area-ingredientes{
+        margin:  10px 0px 20px 0px;
+
+        h3{
+            margin-bottom: 5px;
+        }
+
+        ul{
+            list-style: none;
+        }
+    }
 `;
