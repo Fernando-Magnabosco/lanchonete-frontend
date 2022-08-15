@@ -69,5 +69,30 @@ export const PageArea = styled.div`
                 font-weight: 200;
             }
         }
+
+        .selectIngredient{
+                
+                
+                padding: 10px;
+                height: 50px;
+                width: 350px;
+                border: 1px solid #141414;
+                background: #242424;
+                outline: none;
+                color: #fb0043;
+                border-radius: 0;
+                
+            }
+
+            input::placeholder {
+                font-style: italic;
+                font-weight: 200;
+                color-border: 1px solid 
+            }
+
+            &:hover,
+                :focus {
+                    border-color: #fb0043;
+                }
     }
 `;

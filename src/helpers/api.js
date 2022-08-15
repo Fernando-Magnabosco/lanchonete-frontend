@@ -181,7 +181,11 @@ const API = {
 
     toggleCategory: async (id) => {
         const json = await apiFetchPost("/category/toggle", { id });
+        return json;
+    },
 
+    putIngredientFormProduto: async (id, body) => {
+        const json = await apiFetchPut(`/product/${id}/ingredients`,body);
         return json;
     },
 

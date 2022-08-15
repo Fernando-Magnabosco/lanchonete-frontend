@@ -74,7 +74,6 @@ const Page = () => {
         fData.append("category", category);
         fData.append("price", price);
         fData.append("description", desc);
-        console.log(selectIngredients)
         fData.append("ingredients",JSON.stringify(selectIngredients));
         // fData.append("desc", desc);
         if (fileField.current) {
@@ -128,7 +127,6 @@ const Page = () => {
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
             );
-        
     };
     
 
@@ -221,7 +219,6 @@ const Page = () => {
                                 value={selectIngredients}
                                 onChange={handleChange}
                                 input={<OutlinedInput />}
-                                // selected.join(', ')
                                 renderValue={(selected) => {
                                     let names = [];
                                     
