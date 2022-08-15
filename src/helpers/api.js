@@ -134,13 +134,8 @@ const API = {
         return json;
     },
 
-    updateProduct: async (id, name, price, description, image) => {
-        const json = await apiFetchPut(`/product/${id}`, {
-            name,
-            price,
-            description,
-            image,
-        });
+    updateProduct: async (body, id) => {
+        const json = await apiFetchFile(`/product/${id}`, body);
         return json;
     },
 
