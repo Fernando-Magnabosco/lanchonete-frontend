@@ -23,7 +23,7 @@ export default () => {
             <Route path="/" element={<Home />} />
 
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup" element={<Private component={SignUp} />} />
 
             <Route path="/product/:id" element={<ProductPage />} />
             <Route
