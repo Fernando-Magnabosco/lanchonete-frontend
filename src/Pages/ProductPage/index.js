@@ -19,13 +19,10 @@ const Page = () => {
     useEffect(() => {
         const getIngredients = async (id) => {
             const ingrediente = await api.getIngredienteFromProduct(id);
-            
-            
-            setIngredient(ingrediente.ingredients);
-        }
-        getIngredients(id);
-        
 
+            setIngredient(ingrediente.ingredients);
+        };
+        getIngredients(id);
     }, [id]);
 
     useEffect(() => {
@@ -35,8 +32,6 @@ const Page = () => {
             setLoading(false);
         };
         getProduct(id);
-
-        
 
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }, [id]);
@@ -89,12 +84,17 @@ const Page = () => {
                             )}
                         </div>
                         <div className="area-ingredientes">
-                            <h3>Ingredientes:</h3>
-                            <ul>
-                                {ingredient.length && ingredient.map((i) => {
-                                    return <li>{i.nm_ingrediente}</li>
-                                })}
-                            </ul>
+                            {ingredient.length !== 0 && (
+                                <>
+                                    <h3>Ingredientes:</h3>
+
+                                    <ul>
+                                        {ingredient.map((i) => {
+                                            return <li>{i.nm_ingrediente}</li>;
+                                        })}
+                                    </ul>
+                                </>
+                            )}
                         </div>
                         {isLogged() && (
                             <Link to={`/product/edit/${id}`}> editar </Link>
