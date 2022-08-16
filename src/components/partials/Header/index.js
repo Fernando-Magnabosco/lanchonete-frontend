@@ -28,9 +28,10 @@ const Header = (props) => {
                         <ul>
                             {logged && (
                                 <>
+                                    <li className="button"></li>
+
                                     <li>
                                         <DropdownComponent placeholder="atualizar...">
-
                                             <li>
                                                 <Link to="/category/update">
                                                     categoria
@@ -61,6 +62,9 @@ const Header = (props) => {
                                                     ingrediente
                                                 </Link>
                                             </li>
+                                            <li>
+                                                <Link to="/signup">pessoa</Link>
+                                            </li>
                                         </DropdownComponent>
                                     </li>
                                     <li
@@ -76,9 +80,6 @@ const Header = (props) => {
                                 <>
                                     <li className="button">
                                         <Link to="/login">login</Link>
-                                    </li>
-                                    <li className="button">
-                                        <Link to="/signup">cadastrar</Link>
                                     </li>
                                 </>
                             )}
