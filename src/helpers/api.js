@@ -155,6 +155,11 @@ const API = {
         return json;
     },
 
+    addFormasPagamentos: async (name) => {
+        const json = await apiFetchPost("/formaspagamentos/add", { name });
+        return json;
+    },
+
     getCategories: async () => {
         const json = await apiFetchGet("/category/list");
         return json;
