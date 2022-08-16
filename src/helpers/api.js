@@ -175,6 +175,11 @@ const API = {
         return json;
     },
 
+    getFormaspagamentos: async () => {
+        const json = await apiFetchGet("/formaspagamento/list");
+        return json;
+    },
+
     updateCategory: async (id, name) => {
         const json = await apiFetchPut(`/category/${id}`, { name });
         return json;
@@ -185,8 +190,18 @@ const API = {
         return json;
     },
 
+    updateFormasPagamento: async (id, name) => {
+        const json = await apiFetchPut(`/formaspagamento/${id}`, {name});
+        return json;
+    },
+
     toggleCategory: async (id) => {
         const json = await apiFetchPost("/category/toggle", { id });
+        return json;
+    },
+    
+    toggleFormaspagamentos: async (id) => {
+        const json = await apiFetchPost("/formaspagamento/toggle", { id });
         return json;
     },
 

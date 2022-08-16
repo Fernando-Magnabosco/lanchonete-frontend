@@ -13,7 +13,8 @@ import UpdateCategory from "./Pages/updateCategory";
 import UpdateIngredient from "./Pages/updateIngredient";
 import AddIngredient from "./Pages/Ingredient/AddIngredient";
 import AddCategory from "./Pages/Categoria/AddCategory";
-import AddPagamento from "./Pages/addFormasPagamentos";
+import AddFormasPagamento from "./Pages/addFormasPagamentos";
+import UpdateFormasPagamento from "./Pages/updateFormasPagamentos";
 
 import { Private } from "./components/Private";
 
@@ -52,13 +53,19 @@ export default () => {
 
             <Route
                 path="/formaspagamentos/add"
-                element={<Private component={AddPagamento} />}
+                element={<Private component={AddFormasPagamento} />}
             />
 
             <Route
                 path="/ingredient/update"
                 element={<Private component={UpdateIngredient} />}
             />
+            
+            <Route
+                path="/formaspagamentos/update"
+                element={<Private component={UpdateFormasPagamento} />}
+            />
+
             <Route path="/*" element={<NotFound />} />
         </Routes>
     );
