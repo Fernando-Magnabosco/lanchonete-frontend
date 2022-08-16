@@ -47,17 +47,21 @@ const Page = () => {
             <div className="container-cadastro">
                 <h2>Cadastro de categoria</h2>
                 <form onSubmit={handleSubmit}>
-                    <label className="area">
-                        <h3>Nome:</h3>
-                        <input
-                            autoFocus
-                            type="text"
-                            disabled={disabled}
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </label>
-                    <button>cadastrar</button>
+                    <div className="area">
+                        <label>
+                            <h3>Nome:</h3>
+                            <input
+                                autoFocus
+                                type="text"
+                                disabled={disabled}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                    <div className="area">
+                        <button>cadastrar</button>
+                    </div>
                     <div className="area">
                         {error && <ErrorMessage>{error}</ErrorMessage>}
                     </div>
