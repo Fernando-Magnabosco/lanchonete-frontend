@@ -11,6 +11,7 @@ import ProductPage from "./Pages/ProductPage";
 import UpdateProduct from "./Pages/updateProduct";
 import UpdateCategory from "./Pages/updateCategory";
 import UpdateIngredient from "./Pages/updateIngredient";
+import UpdateUser from "./Pages/updateUser";
 
 import AddIngredient from "./Pages/Ingredient/AddIngredient";
 import AddCategory from "./Pages/Categoria/AddCategory";
@@ -54,6 +55,12 @@ export default () => {
                 path="/ingredient/update"
                 element={<Private component={UpdateIngredient} />}
             />
+
+            <Route
+                path="/user/update"
+                element={<Private component={UpdateUser} />}
+            />
+
             <Route path="/*" element={<NotFound />} />
         </Routes>
     );

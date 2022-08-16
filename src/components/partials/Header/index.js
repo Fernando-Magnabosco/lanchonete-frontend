@@ -28,8 +28,6 @@ const Header = (props) => {
                         <ul>
                             {logged && (
                                 <>
-                                    <li className="button"></li>
-
                                     <li>
                                         <DropdownComponent placeholder="atualizar...">
                                             <li>
@@ -40,6 +38,11 @@ const Header = (props) => {
                                             <li>
                                                 <Link to="/ingredient/update">
                                                     ingrediente
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/user/update">
+                                                    pessoa
                                                 </Link>
                                             </li>
                                         </DropdownComponent>
