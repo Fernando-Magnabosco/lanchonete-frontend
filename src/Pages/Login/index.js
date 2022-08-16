@@ -9,7 +9,7 @@ const Page = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [rememberPassword, setrememberPassword] = useState(false);
+    const [rememberPassword, setRememberPassword] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState("");
 
@@ -79,7 +79,7 @@ const Page = () => {
                                     disabled={disabled}
                                     checked={rememberPassword}
                                     onChange={() =>
-                                        setrememberPassword(!rememberPassword)
+                                        setRememberPassword(!rememberPassword)
                                     }
                                 />
                             </div>

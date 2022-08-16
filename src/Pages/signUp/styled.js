@@ -68,5 +68,33 @@ export const PageArea = styled.div`
                 font-weight: 200;
             }
         }
+
+        .amd {
+            width: 350px;
+            display: flex;
+            justify-content: space-between;
+            color: #fb0043;
+
+            input {
+                all: unset;
+                display: inline-block;
+                background-color: #141414;
+                width: fit-content;
+                height: 19px;
+                width: 19px;
+                border-radius: 2px;
+
+                transition: background-color 150ms ease-in-out;
+
+                &:hover,
+                :focus {
+                    cursor: pointer;
+                    background-color: gray;
+                }
+                &:checked {
+                    background-color: #fb0043;
+                }
+            }
+        }
     }
 `;

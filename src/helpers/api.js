@@ -115,10 +115,11 @@ const API = {
         return json;
     },
 
-    signup: async (name, email, password) => {
+    signup: async (name, email, isAdmin, password) => {
         const json = await apiFetchPost("/user/signup", {
             name,
             email,
+            isAdmin,
             password,
         });
         return json;

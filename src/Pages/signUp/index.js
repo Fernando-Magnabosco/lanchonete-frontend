@@ -12,6 +12,7 @@ const Page = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [adm, setAdm] = useState(false);
 
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState("");
@@ -41,7 +42,8 @@ const Page = () => {
             return;
         }
 
-        const json = await api.signup(name, email, password);
+        const json = await api.signup(name, email, adm, password);
+        console.log(json);
 
         if (json.error) {
             setError(json.error);
@@ -63,7 +65,6 @@ const Page = () => {
                         <label>
                             <h3>Nome:</h3>
                             <input
-                                type="text"
                                 disabled={disabled}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -95,6 +96,7 @@ const Page = () => {
                         </label>
                     </div>
 
+
                     <div className="area">
                         <label>
                             <h3>Confirmar senha:</h3>
@@ -106,6 +108,23 @@ const Page = () => {
                                     setConfirmPassword(e.target.value)
                                 }
                             />
+                        </label>
+                    </div>
+
+                    <div className="area">
+                        <label className="amd">
+                            <h3>administrador</h3>
+                            <div className="abc">
+                            <span className="marcar"></span>
+                                    <input
+                                        type="checkbox"
+                                        disabled={disabled}
+                                        checked={adm}
+                                        onChange={() =>
+                                             setAdm(!adm)
+                                        }
+                                    />
+                            </div>
                         </label>
                     </div>
 
