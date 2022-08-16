@@ -4,7 +4,7 @@ export const PageArea = styled.div`
     padding: 20px;
     background: #242424;
 
-    .container-cadastro{
+    .container-cadastro {
         width: 1000px;
         height: calc(95vh - 50px);
         margin: auto;
@@ -15,16 +15,17 @@ export const PageArea = styled.div`
         font-family: "Inter", sans-serif;
         color: #fb0043;
 
-        form{
+        form {
             margin-top: 20px;
-            
 
-            .area{
+            .area {
                 padding: 10px 0px 10px 45px;
+                display: inline-block;
+
                 width: 400px;
             }
-            
-            button{ 
+
+            button {
                 margin-left: 45px;
                 width: 350px;
                 height: 50px;
@@ -46,8 +47,8 @@ export const PageArea = styled.div`
                     border-color: #fb0043;
                 }
             }
-            
-            input{
+
+            input {
                 padding: 10px;
                 height: 50px;
                 width: 350px;
@@ -64,7 +65,5 @@ export const PageArea = styled.div`
                 }
             }
         }
-
     }
-
 `;
