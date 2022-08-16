@@ -206,7 +206,22 @@ const API = {
     },
 
     putIngredientFormProduto: async (id, body) => {
-        const json = await apiFetchPut(`/product/${id}/ingredients`,body);
+        const json = await apiFetchPut(`/product/${id}/ingredients`, body);
+        return json;
+    },
+
+    getUsers: async () => {
+        const json = await apiFetchGet("/user/list");
+        return json;
+    },
+
+    updateUser: async (id, body) => {
+        const json = await apiFetchPut(`/user/${id}`, body);
+        return json;
+    },
+
+    deleteUser: async (id) => {
+        const json = await apiFetchPost("/user/delete", { id });
         return json;
     },
 
