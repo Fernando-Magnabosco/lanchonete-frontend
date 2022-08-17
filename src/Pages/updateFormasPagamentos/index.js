@@ -67,12 +67,19 @@ const Page = () => {
         setDisabled(true);
         setError("");
 
-        
         const json = await api.toggleFormaspagamentos(ID);
+        console.log(json);
 
         if (!json.error) {
-            
             setDisabled(false);
+            for(let cat of formas){
+                if(cat.idformapagamento){
+                    cat.flsituacao = !cat.flsituacao;
+                    setForma(cat);
+                    break;
+                }
+            }            
+
             return;
         } else {
             setError(json.error);

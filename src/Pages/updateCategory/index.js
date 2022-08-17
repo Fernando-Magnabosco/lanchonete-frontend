@@ -78,7 +78,6 @@ const Page = () => {
                 }
             }
 
-            // window.location.reload();
             return;
         } else {
             setError(json.error);
