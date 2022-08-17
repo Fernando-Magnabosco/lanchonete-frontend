@@ -15,11 +15,9 @@ import UpdateUser from "./Pages/updateUser";
 
 import AddIngredient from "./Pages/Ingredient/AddIngredient";
 import AddCategory from "./Pages/Categoria/AddCategory";
-<<<<<<< HEAD
 import AddFormasPagamento from "./Pages/addFormasPagamentos";
 import UpdateFormasPagamento from "./Pages/updateFormasPagamentos";
-=======
->>>>>>> de36f29497c7791b52a760697ca346a33f15859b
+
 
 import { Private } from "./components/Private";
 
@@ -57,27 +55,27 @@ export default () => {
             />
 
             <Route
-<<<<<<< HEAD
+
                 path="/formaspagamentos/add"
                 element={<Private component={AddFormasPagamento} />}
-=======
+            />
+            
+            <Route
                 path="/ingredient/update"
                 element={<Private component={UpdateIngredient} />}
->>>>>>> de36f29497c7791b52a760697ca346a33f15859b
+
             />
 
             <Route
                 path="/user/update"
                 element={<Private component={UpdateUser} />}
             />
-<<<<<<< HEAD
             
             <Route
                 path="/formaspagamentos/update"
                 element={<Private component={UpdateFormasPagamento} />}
             />
-=======
->>>>>>> de36f29497c7791b52a760697ca346a33f15859b
+
 
             <Route path="/*" element={<NotFound />} />
         </Routes>
