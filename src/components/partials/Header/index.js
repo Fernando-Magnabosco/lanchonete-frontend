@@ -45,6 +45,11 @@ const Header = (props) => {
                                                     pessoa
                                                 </Link>
                                             </li>
+                                            <li>
+                                                <Link to="/formaspagamento/update">
+                                                    forma de pagamento
+                                                </Link>
+                                            </li>
                                         </DropdownComponent>
                                     </li>
 
@@ -67,6 +72,11 @@ const Header = (props) => {
                                             </li>
                                             <li>
                                                 <Link to="/signup">pessoa</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/formaspagamento/add">
+                                                    forma de pagamento
+                                                </Link>
                                             </li>
                                         </DropdownComponent>
                                     </li>
