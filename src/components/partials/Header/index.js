@@ -28,24 +28,24 @@ const Header = (props) => {
                         <ul>
                             {logged && (
                                 <>
-                                    <li>
+                                    <li key="0">
                                         <DropdownComponent placeholder="atualizar...">
-                                            <li>
+                                            <li key="0">
                                                 <Link to="/category/update">
                                                     categoria
                                                 </Link>
                                             </li>
-                                            <li>
+                                            <li key="1">
                                                 <Link to="/ingredient/update">
                                                     ingrediente
                                                 </Link>
                                             </li>
-                                            <li>
+                                            <li key="2">
                                                 <Link to="/user/update">
                                                     pessoa
                                                 </Link>
                                             </li>
-                                            <li>
+                                            <li key="3">
                                                 <Link to="/formaspagamento/update">
                                                     forma de pagamento
                                                 </Link>
@@ -53,27 +53,27 @@ const Header = (props) => {
                                         </DropdownComponent>
                                     </li>
 
-                                    <li>
+                                    <li key="1">
                                         <DropdownComponent placeholder="adicionar...">
-                                            <li>
+                                            <li key="0">
                                                 <Link to="/product/add">
                                                     produto
                                                 </Link>
                                             </li>
-                                            <li>
+                                            <li key="1">
                                                 <Link to="/category/add">
                                                     categoria
                                                 </Link>
                                             </li>
-                                            <li>
+                                            <li key="2">
                                                 <Link to="/ingredient/add">
                                                     ingrediente
                                                 </Link>
                                             </li>
-                                            <li>
+                                            <li key="3">
                                                 <Link to="/signup">pessoa</Link>
                                             </li>
-                                            <li>
+                                            <li key="4">
                                                 <Link to="/formaspagamento/add">
                                                     forma de pagamento
                                                 </Link>
@@ -81,6 +81,7 @@ const Header = (props) => {
                                         </DropdownComponent>
                                     </li>
                                     <li
+                                        key="2"
                                         className="button"
                                         onClick={handleLogout}
                                     >
@@ -91,7 +92,7 @@ const Header = (props) => {
 
                             {!logged && (
                                 <>
-                                    <li className="button">
+                                    <li key="0" className="button">
                                         <Link to="/login">login</Link>
                                     </li>
                                 </>

@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import ProductItem from "../../components/partials/Product";
 import { PageContainer } from "../../components/mainComponents";
 import { PageArea, SearchArea } from "./styled";
-
+import { isLogged } from "../../helpers/authHandler";
 import useApi from "../../helpers/api";
 
 const itemPerPage = 8;
@@ -80,7 +80,13 @@ const Page = () => {
 
             <PageContainer>
                 <PageArea>
-                    <h2>Produtos</h2>
+                    <div className="title">
+                        <h2>Produtos</h2>
+
+                        {isLogged() && (
+                            <Link to="/pedidos">ir para pedidos </Link>
+                        )}
+                    </div>
                     {loading && products.length === 0 && (
                         <div className="loading"> Carregando... </div>
                     )}

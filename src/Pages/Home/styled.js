@@ -150,8 +150,22 @@ export const SearchArea = styled.div`
     }
 `;
 export const PageArea = styled.div`
-    h2 {
-        font-size: 20px;
+    .title {
+        width: 100%;
+        position: relative;
+        h2 {
+            display: inline;
+            font-size: 20px;
+        }
+        a {
+            position: absolute;
+            right: 0;
+            color: #fb0043;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 
     .productsList {
@@ -211,6 +225,10 @@ export const PageArea = styled.div`
                 cursor: default;
             }
         }
+    }
+
+    hr {
+        margin-top: 10px;
     }
 
     @media (max-width: 768px) {

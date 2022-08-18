@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-import useApi from "../../../helpers/api";
+import useApi from "../../helpers/api";
+
 import { PageArea } from "./styled";
-import { ErrorMessage } from "../../../components/mainComponents";
-import { doLogin } from "../../../helpers/authHandler";
+import { ErrorMessage } from "../../components/mainComponents";
 
 const Page = () => {
     const api = useApi();
@@ -17,26 +17,20 @@ const Page = () => {
         e.preventDefault();
         setDisabled(true);
         setError("");
-        let errors = [];
 
         if (!name.trim()) {
-            error.push("Nome do produto é obrigatório");
-        }
-
-        if (errors.length !== 0) {
-            setError(errors.join("\n"));
+            setError("Nome é obrigatório");
+            console.log(error);
             setDisabled(false);
             return;
         }
 
-        const json = await api.addCategory(name);
+        const json = await api.addIngredient(name);
 
-        if (json.error) {
-            setError(json.error);
-            setDisabled(false);
+        if (!json.error) {
+            window.location.reload();
         } else {
-            doLogin(json.token, false);
-            window.location.href = "/";
+            setError(json.error);
         }
 
         setDisabled(false);
@@ -45,7 +39,7 @@ const Page = () => {
     return (
         <PageArea>
             <div className="container-cadastro">
-                <h2>Cadastro de categoria</h2>
+                <h2>Cadastro de ingrediente</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="area">
                         <label>
@@ -59,9 +53,11 @@ const Page = () => {
                             />
                         </label>
                     </div>
+
                     <div className="area">
                         <button>cadastrar</button>
                     </div>
+
                     <div className="area">
                         {error && <ErrorMessage>{error}</ErrorMessage>}
                     </div>
