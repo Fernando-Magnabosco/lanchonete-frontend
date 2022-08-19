@@ -105,7 +105,6 @@ const apiFetchGet = async (endpoint, body = []) => {
         window.location.href = "/signin";
         return;
     }
-
     return json;
 };
 
@@ -191,7 +190,7 @@ const API = {
     },
 
     updateFormasPagamento: async (id, name) => {
-        const json = await apiFetchPut(`/formaspagamento/${id}`, {name});
+        const json = await apiFetchPut(`/formaspagamento/${id}`, { name });
         return json;
     },
 
@@ -199,7 +198,7 @@ const API = {
         const json = await apiFetchPost("/category/toggle", { id });
         return json;
     },
-    
+
     toggleFormaspagamentos: async (id) => {
         const json = await apiFetchPost("/formaspagamento/toggle", { id });
         return json;
@@ -222,6 +221,12 @@ const API = {
 
     deleteUser: async (id) => {
         const json = await apiFetchPost("/user/delete", { id });
+        return json;
+    },
+
+    getComandas: async (body) => {
+        const json = await apiFetchGet("/comanda/list", body);
+
         return json;
     },
 

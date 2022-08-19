@@ -180,12 +180,16 @@ const style = styled.div`
                 textarea {
                     all: unset;
                     box-sizing: border-box;
-                    padding: 10px;
-                    width: 95%;
-                    height: 130px;
-                    background-color: #343434;
                     text-align: justify;
                     overflow-wrap: break-word;
+                }
+
+                .garcom {
+                    position: absolute;
+                    bottom: 10px;
+                    width: 95%;
+                    height: 20px;
+                    overflow: hidden;
                 }
                 button {
                     right: 30px;
@@ -197,6 +201,10 @@ const style = styled.div`
 
                 .reason,
                 textarea {
+                    width: 95%;
+                    height: 130px;
+                    padding: 10px;
+                    background-color: #343434;
                     ::-webkit-scrollbar {
                         position: absolute;
                         left: 0;

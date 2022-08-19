@@ -22,6 +22,11 @@ export default (props) => {
             return acc + (cur.cancelled ? 0 : parseInt(cur.price));
         }, 0);
     }
+    if (props.comanda.desconto) {
+        Total -= props.comanda.desconto;
+    }
+
+    console.log(props.comanda.date);
 
     const api = useApi();
 
@@ -66,7 +71,13 @@ export default (props) => {
     return (
         <Style>
             {ModalOpen && (
-                <div className="unclickable">
+                <div
+                    className="unclickable"
+                    onClick={(e) => {
+                        if (e.target.className === "unclickable")
+                            setModalOpen(false);
+                    }}
+                >
                     <div className="modal">
                         <button
                             onClick={() => {
@@ -80,10 +91,10 @@ export default (props) => {
                                 <div className="reason">
                                     Motivo: {ModalProduct.motivocancelamento}
                                 </div>
-                                <br />
-                                <div className="garcom">
+
+                                <span className="garcom">
                                     Garcom: {ModalProduct.garcomalteracao}
-                                </div>
+                                </span>
                             </div>
                         )}
                         {!ModalProduct.cancelled && (
@@ -179,6 +190,29 @@ export default (props) => {
                                 </div>
                             );
                         })}
+                        {props.comanda.desconto && (
+                            <div className="product">
+                                <div className="name">
+                                    <span
+                                        style={{
+                                            marginRight: "5px",
+                                            visibility: "hidden",
+                                        }}
+                                    >
+                                        X
+                                    </span>
+                                    desconto
+                                </div>
+                                <div className="date"></div>
+                                <div className="price">
+                                    {" "}
+                                    -
+                                    {priceFormatter.format(
+                                        props.comanda.desconto
+                                    )}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
 
