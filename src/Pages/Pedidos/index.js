@@ -50,6 +50,9 @@ const Page = () => {
                             price: "10,00",
                             date: new Date(),
                             cancelled: true,
+                            motivocancelamento:
+                                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis laboriosam optio praesentium? Accusamus aliquam ratione id nulla dicta corporis error, ullam quod doloremque nobis nihil soluta autem ab voluptas non illo quae! Nihil expedita sequi molestiae ratione similique nam sunt, laudantium molestias. Aliquam, impedit nostrum! Officia sed earum molestiae optio!",
+                            garcomalteracao: "Pedro",
                         },
                         {
                             ID: 1,
