@@ -26,6 +26,7 @@ export default (props) => {
     if (props.comanda.desconto) {
         Total -= props.comanda.desconto;
     }
+    if (Total < 0) Total = 0;
 
     // console.log(props.children);
 
