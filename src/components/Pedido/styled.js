@@ -48,6 +48,7 @@ const style = styled.div`
         padding: 10px;
         height: 40px;
         background-color: #242424;
+
         &.open {
             height: auto;
             overflow-y: scroll;
@@ -126,14 +127,15 @@ const style = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        position: absolute;
+        position: fixed;
         z-index: 10;
 
-        width: 100vw;
+        width: calc(100vw - 10px);
         height: 100vh;
+
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.6);
 
         .modal {
             position: relative;

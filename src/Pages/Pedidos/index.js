@@ -12,10 +12,12 @@ const Page = () => {
     useEffect(() => {
         const getComandas = async () => {
             const json = await api.getComandas();
-            // console.log(json.comandas);
             setComandas(json.comandas);
         };
+
         getComandas();
+        const interval = setInterval(getComandas, 3000);
+        return () => clearInterval(interval);
     }, []);
 
     return (

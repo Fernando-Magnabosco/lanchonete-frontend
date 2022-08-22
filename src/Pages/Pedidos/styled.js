@@ -8,5 +8,7 @@ export const PageArea = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        border-radius: 5px;
     }
 `;
