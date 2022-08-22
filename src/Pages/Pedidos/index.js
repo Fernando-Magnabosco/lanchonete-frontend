@@ -12,7 +12,7 @@ const Page = () => {
     useEffect(() => {
         const getComandas = async () => {
             const json = await api.getComandas();
-            console.log(json.comandas);
+            // console.log(json.comandas);
             setComandas(json.comandas);
         };
         getComandas();
@@ -33,7 +33,19 @@ const Page = () => {
                             status: comanda.situacao,
                             desconto: comanda.desconto,
                         }}
-                    />
+                    >
+                        {comanda.produtos.map((produto) => ({
+                            ID: produto.id_produto,
+                            name: produto.Produto.nm_produto,
+                            price: produto.vlvenda,
+                            date: new Date(produto.dataprodutoscomanda),
+                            cancelled: produto.pedidocancelado,
+                            garcomalteracao: produto.User
+                                ? produto.User.name
+                                : "",
+                            motivocancelamento: produto.motivocancelamento,
+                        }))}
+                    </Pedido>
                 ))}
             </div>
         </PageArea>

@@ -54,21 +54,6 @@ const style = styled.div`
             max-height: 200px;
             transition: max-height 150ms ease-in;
 
-            ::-webkit-scrollbar {
-                position: absolute;
-                left: 0;
-                width: 10px;
-            }
-            ::-webkit-scrollbar-track {
-            }
-            ::-webkit-scrollbar-thumb {
-                background: #888;
-                border-radius: 10px;
-            }
-            ::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
-
             .products {
                 width: 100%;
 
@@ -205,20 +190,6 @@ const style = styled.div`
                     height: 130px;
                     padding: 10px;
                     background-color: #343434;
-                    ::-webkit-scrollbar {
-                        position: absolute;
-                        left: 0;
-                        width: 10px;
-                    }
-                    ::-webkit-scrollbar-track {
-                    }
-                    ::-webkit-scrollbar-thumb {
-                        background: #888;
-                        border-radius: 10px;
-                    }
-                    ::-webkit-scrollbar-thumb:hover {
-                        background: #555;
-                    }
                 }
             }
         }

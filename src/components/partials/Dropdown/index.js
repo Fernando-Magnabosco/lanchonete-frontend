@@ -14,7 +14,7 @@ const DropdownComponent = (props) => {
 
         const timeOut = setTimeout(() => {
             setStyle({ display: "none" });
-        }, 4000);
+        },  4000);
 
         return () => {
             clearTimeout(timeOut);

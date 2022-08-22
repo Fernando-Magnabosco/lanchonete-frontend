@@ -15,6 +15,7 @@ export default (props) => {
     const [ModalOpen, setModalOpen] = useState(false);
     const [ModalProduct, setModalProduct] = useState(null);
     const [Reason, setReason] = useState();
+    const [NeedReload, setNeedReload] = useState(false);
 
     let Total = 0;
     if (props.children) {
@@ -26,7 +27,7 @@ export default (props) => {
         Total -= props.comanda.desconto;
     }
 
-    console.log(props.comanda.date);
+    // console.log(props.children);
 
     const api = useApi();
 
@@ -38,14 +39,26 @@ export default (props) => {
 
     const handleCancel = (e) => {
         e.preventDefault();
-        console.log(Reason);
         const cancelProduct = async () => {
-            const json = await api.cancelProduct(ModalProduct.ID, { Reason });
+            const garcom = await api.userLogged();
+            const json = await api.cancelProduct({
+                comanda: props.comanda.ID,
+                produto: ModalProduct.ID,
+                reason: Reason,
+                garcom,
+            });
+            console.log(json);
             if (json.error) setError(json.error);
+            console.log(garcom);
+            setModalProduct({
+                ...ModalProduct,
+                cancelled: true,
+                garcomalteracao: garcom.name,
+                motivocancelamento: Reason,
+            });
+            setNeedReload(true);
         };
-
         cancelProduct();
-        setModalProduct({ ...ModalProduct, cancelled: true });
     };
 
     const dateComandaOptions = {
@@ -74,6 +87,7 @@ export default (props) => {
                 <div
                     className="unclickable"
                     onClick={(e) => {
+                        if (NeedReload) window.location.reload();
                         if (e.target.className === "unclickable")
                             setModalOpen(false);
                     }}
@@ -81,6 +95,7 @@ export default (props) => {
                     <div className="modal">
                         <button
                             onClick={() => {
+                                if (NeedReload) window.location.reload();
                                 setModalOpen(false);
                             }}
                         >
@@ -98,21 +113,17 @@ export default (props) => {
                             </div>
                         )}
                         {!ModalProduct.cancelled && (
-                            <form action="">
-                                <div className="text">
-                                    <textarea
-                                        maxLength="500"
-                                        onChange={(e) =>
-                                            setReason(e.target.value)
-                                        }
-                                        placeholder="Motivo"
-                                    ></textarea>
-                                    <br />
-                                    <button onClick={handleCancel}>
-                                        cancelar pedido
-                                    </button>
-                                </div>
-                            </form>
+                            <div className="text">
+                                <textarea
+                                    maxLength="500"
+                                    onChange={(e) => setReason(e.target.value)}
+                                    placeholder="Motivo"
+                                ></textarea>
+                                <br />
+                                <button onClick={handleCancel}>
+                                    cancelar pedido
+                                </button>
+                            </div>
                         )}
                     </div>
                 </div>

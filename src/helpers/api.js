@@ -124,6 +124,11 @@ const API = {
         return json;
     },
 
+    userLogged: async () => {
+        const json = await apiFetchGet("/user/logged");
+        return json;
+    },
+
     getProduct: async (id) => {
         const json = await apiFetchGet(`/product/${id}`);
         return json;
@@ -227,6 +232,11 @@ const API = {
     getComandas: async (body) => {
         const json = await apiFetchGet("/comanda/list", body);
 
+        return json;
+    },
+
+    cancelProduct: async (body) => {
+        const json = await apiFetchPost("/comanda/item/cancel", body);
         return json;
     },
 
