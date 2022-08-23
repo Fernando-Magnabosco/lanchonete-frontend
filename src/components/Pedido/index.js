@@ -10,6 +10,9 @@ export default (props) => {
 
     // Body states
     const [BodyOpen, setBodyOpen] = useState(false);
+    const [NewClicked, setNewClicked] = useState(false);
+    const [Products, setProducts] = useState([]);
+    let selectedProduct = -1;
 
     // Modal states
     const [ModalOpen, setModalOpen] = useState(false);
@@ -31,6 +34,15 @@ export default (props) => {
     // console.log(props.children);
 
     const api = useApi();
+
+    useEffect(() => {
+        const getProducts = async () => {
+            const json = await api.getProducts();
+
+            setProducts(json.products);
+        };
+        getProducts();
+    }, []);
 
     const openModal = (product) => {
         setError("");
@@ -62,6 +74,28 @@ export default (props) => {
         cancelProduct();
     };
 
+    const ProductToComanda = () => {
+        const addProductToComanda = async () => {
+            const json = await api.addProductToComanda({
+                id_comanda: props.comanda.ID,
+                id_produto: selectedProduct,
+            });
+
+            if (json.error) setError(json.error);
+            console.log(props.children);
+            props.children.push({
+                ID: json.id_produto,
+                name: json.nm_produto,
+                price: json.valor,
+                date: new Date(),
+                cancelled: false,
+            });
+            setNewClicked(false);
+        };
+        if (selectedProduct === -1) return;
+        addProductToComanda();
+    };
+
     const dateComandaOptions = {
         day: "2-digit",
         month: "short",
@@ -80,6 +114,7 @@ export default (props) => {
     const priceFormatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "BRL",
+        minimumIntegerDigits: "2",
     });
 
     return (
@@ -154,11 +189,47 @@ export default (props) => {
             <div className={`body ${BodyOpen ? "open" : "closed"}`}>
                 {BodyOpen && props.children && (
                     <div className="products">
+                        <div
+                            onClick={() => setNewClicked(true)}
+                            className={`product ${
+                                NewClicked ? "clicked" : "new"
+                            }`}
+                        >
+                            {!NewClicked && "+"}
+                            {NewClicked && (
+                                <>
+                                    <select
+                                        onChange={(e) => {
+                                            selectedProduct = e.target.value;
+                                        }}
+                                    >
+                                        <option value="-1">
+                                            Selecione um produto
+                                        </option>
+                                        {Products &&
+                                            Products.map((product) => (
+                                                <option
+                                                    value={product.id_produto}
+                                                >
+                                                    {product.nm_produto}
+                                                </option>
+                                            ))}
+                                    </select>
+                                    <div
+                                        onClick={ProductToComanda}
+                                        className="add"
+                                    >
+                                        Adicionar
+                                    </div>
+                                </>
+                            )}
+                        </div>
+
                         {props.children.map((product) => {
                             return (
                                 <div
                                     className={`product ${
-                                        product.cancelled ? " cancelled" : ""
+                                        product.cancelled ? "cancelled" : ""
                                     }`}
                                     onClick={() => {
                                         if (!product.cancelled) return;

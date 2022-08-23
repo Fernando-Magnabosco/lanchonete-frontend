@@ -57,11 +57,11 @@ const style = styled.div`
 
             .products {
                 width: 100%;
-
+                z-index: 1;
                 .product {
                     width: 100%;
                     display: flex;
-                    border-radius: 5px;
+                    border-radius: 2px;
 
                     &:hover {
                         background-color: #555;
@@ -99,6 +99,43 @@ const style = styled.div`
                         button {
                             visibility: visible;
                         }
+                    }
+                }
+
+                .new {
+                    font-weight: bold;
+                    justify-content: center;
+                    overflow: hidden;
+
+                    &: hover {
+                        height: auto;
+                        cursor: pointer;
+                    }
+                }
+
+                .clicked {
+                    select {
+                        all: unset;
+                        background-color: #242424;
+                        position: relative;
+                        padding: 0 10px 0 15px;
+                        width: 80%;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        &:hover {
+                            background-color: #141414;
+                        }
+                    }
+                    .add {
+                        width: 20%;
+                        text-align: right;
+                        cursor: pointer;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                    &:hover {
+                        background-color: #242424;
                     }
                 }
             }

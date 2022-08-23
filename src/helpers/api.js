@@ -23,7 +23,7 @@ const apiFetchFile = async (endpoint, body) => {
 
     if (json.notallowed) {
         doLogout();
-        window.location.href = "/signin";
+        window.location.href = "/login";
         return;
     }
 
@@ -53,7 +53,7 @@ const apiFetchPost = async (endpoint, body) => {
 
     if (json.notallowed) {
         doLogout();
-        window.location.href = "/signin";
+        window.location.href = "/login";
         return;
     }
 
@@ -84,7 +84,7 @@ const apiFetchPut = async (endpoint, body) => {
 
     if (json.notallowed) {
         doLogout();
-        window.location.href = "/signin";
+        window.location.href = "/login";
         return;
     }
 
@@ -102,7 +102,7 @@ const apiFetchGet = async (endpoint, body = []) => {
     const json = await response.json();
 
     if (json.notallowed) {
-        window.location.href = "/signin";
+        window.location.href = "/login";
         return;
     }
     return json;
@@ -237,6 +237,11 @@ const API = {
 
     cancelProduct: async (body) => {
         const json = await apiFetchPost("/comanda/item/cancel", body);
+        return json;
+    },
+
+    addProductToComanda: async (body) => {
+        const json = await apiFetchPost("/comanda/item/add", body);
         return json;
     },
 
