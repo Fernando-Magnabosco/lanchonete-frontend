@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Pedido from "../../components/Pedido";
+import Pedido, { Empty } from "../../components/Comanda";
 
 import { PageArea } from "./styled";
 
@@ -25,6 +25,7 @@ const Page = () => {
             <h1>Comandas</h1>
 
             <div className="pedidos">
+                <Empty />
                 {Comandas.map((comanda) => (
                     <Pedido
                         key={comanda.ID}

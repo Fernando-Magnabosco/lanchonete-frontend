@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const style = styled.div`
+const Comanda = styled.div`
     width: 75%;
     border-radius: 5px;
     overflow: hidden;
@@ -88,6 +88,9 @@ const style = styled.div`
                             color: white;
                         }
                     }
+                    .name {
+                        text-overflow: ellipsis;
+                    }
                     .date {
                         text-align: center;
                     }
@@ -107,42 +110,35 @@ const style = styled.div`
                     justify-content: center;
                     overflow: hidden;
 
-                    &: hover {
+                    &.clicked {
+                        font-weight: normal;
+                        select {
+                            all: unset;
+                            background-color: #141414;
+                            position: relative;
+                            padding-left: 15px;
+                            flex: 1;
+                            text-overflow: ellipsis;
+                            cursor: pointer;
+                        }
+                        .add {
+                            flex: 2;
+                            text-align: right;
+                            cursor: pointer;
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                        &:hover {
+                            background-color: #242424;
+                        }
+                    }
+
+                    &:hover {
                         height: auto;
                         cursor: pointer;
                     }
                 }
-
-                .clicked {
-                    select {
-                        all: unset;
-                        background-color: #242424;
-                        position: relative;
-                        padding: 0 10px 0 15px;
-                        width: 80%;
-                        text-overflow: ellipsis;
-                        cursor: pointer;
-                        &:hover {
-                            background-color: #141414;
-                        }
-                    }
-                    .add {
-                        width: 20%;
-                        text-align: right;
-                        cursor: pointer;
-                        &:hover {
-                            text-decoration: underline;
-                        }
-                    }
-                    &:hover {
-                        background-color: #242424;
-                    }
-                }
-            }
-
-            .total {
-                text-align: right;
-                width: 100%;
             }
         }
 
@@ -156,6 +152,17 @@ const style = styled.div`
             }
             .total {
                 margin-right: 10px;
+            }
+        }
+
+        .bottom {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-left: 15px;
+            .finalize:hover {
+                text-decoration: underline;
+                cursor: pointer;
             }
         }
     }
@@ -235,4 +242,4 @@ const style = styled.div`
     }
 `;
 
-export default style;
+export default Comanda;

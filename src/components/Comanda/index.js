@@ -1,7 +1,16 @@
 import React, { useState } from "react";
-import Style from "./styled";
+import Comanda from "./styled";
 import useApi from "../../helpers/api";
 import { useEffect } from "react";
+
+export const Empty = () => {
+    return (
+        <Comanda>
+            <div className="header">+</div>
+            <div className="body"></div>
+        </Comanda>
+    );
+};
 
 export default (props) => {
     const [Error, setError] = useState();
@@ -118,7 +127,7 @@ export default (props) => {
     });
 
     return (
-        <Style>
+        <Comanda>
             {ModalOpen && (
                 <div
                     className="unclickable"
@@ -191,8 +200,8 @@ export default (props) => {
                     <div className="products">
                         <div
                             onClick={() => setNewClicked(true)}
-                            className={`product ${
-                                NewClicked ? "clicked" : "new"
+                            className={`product new ${
+                                NewClicked ? "clicked" : ""
                             }`}
                         >
                             {!NewClicked && "+"}
@@ -273,7 +282,7 @@ export default (props) => {
                                 </div>
                             );
                         })}
-                        {props.comanda.desconto && (
+                        {props.comanda.desconto !== 0 && (
                             <div className="product">
                                 <div className="name">
                                     <span
@@ -299,12 +308,18 @@ export default (props) => {
                     </div>
                 )}
 
-                {!BodyOpen && (
-                    <div className="garcomName">{props.comanda.garcom}</div>
-                )}
+                <div className="bottom">
+                    {BodyOpen && (
+                        <div className="finalize">finalizar comanda</div>
+                    )}
 
-                <div className="total">{priceFormatter.format(Total)}</div>
+                    {!BodyOpen && (
+                        <div className="garcomName">{props.comanda.garcom}</div>
+                    )}
+
+                    <div className="total">{priceFormatter.format(Total)}</div>
+                </div>
             </div>
-        </Style>
+        </Comanda>
     );
 };
