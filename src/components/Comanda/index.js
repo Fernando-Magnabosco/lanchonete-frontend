@@ -68,7 +68,7 @@ export const Empty = (props) => {
                                             if (SelectedProduct !== -1)
                                                 setComandaProducts([
                                                     ...ComandaProducts,
-                                                    parseInt(SelectedProduct),
+                                                    parseFloat(SelectedProduct),
                                                 ]);
                                         }}
                                         className="add"
@@ -109,7 +109,7 @@ export default (props) => {
     let Total = 0;
     if (props.children) {
         Total = props.children.reduce((acc, cur) => {
-            return acc + (cur.cancelled ? 0 : parseInt(cur.price));
+            return acc + (cur.cancelled ? 0 : parseFloat(cur.price));
         }, 0);
     }
 
@@ -255,10 +255,8 @@ export default (props) => {
 
     const priceMask = createNumberMask({
         prefix: "R$ ",
-        includeThousandsSeparator: true,
-        thousandsSeparatorSymbol: ".",
         allowDecimal: true,
-        decimalSymbol: ",",
+        decimalSymbol: ".",
     });
 
     return (
@@ -478,7 +476,7 @@ export default (props) => {
                                     </div>
                                     <div className="price">
                                         {priceFormatter.format(
-                                            parseInt(product.price)
+                                            parseFloat(product.price)
                                         )}
                                     </div>
                                 </div>
