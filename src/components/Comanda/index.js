@@ -4,10 +4,110 @@ import useApi from "../../helpers/api";
 import { useEffect } from "react";
 
 export const Empty = () => {
+    // Body states
+    const [BodyOpen, setBodyOpen] = useState(true);
+    const [NewClicked, setNewClicked] = useState(true);
+    const [Products, setProducts] = useState([]);
+    const [ComandaProducts, setComandaProducts] = useState([]);
+    const [SelectedProduct, setSelectedProduct] = useState(-1);
+
+    const api = useApi();
+
+    const add = () => {
+        const addComanda = async () => {
+            const json = await api.addComanda({
+                id_garcom: await api.userLogged(),
+                products: ComandaProducts,
+            });
+        };
+        addComanda();
+        setComandaProducts([]);
+    };
+    useEffect(() => {
+        const getProducts = async () => {
+            const json = await api.getProducts();
+
+            setProducts(json.products);
+        };
+        getProducts();
+    }, []);
+
     return (
         <Comanda>
-            <div className="header">+</div>
-            <div className="body"></div>
+            <div
+                className="header empty"
+                onClick={() => setBodyOpen(!BodyOpen)}
+            >
+                +
+            </div>
+            <div className={`body ${BodyOpen ? "open" : ""}`}>
+                {BodyOpen && (
+                    <div className="products">
+                        <div
+                            onClick={() => setNewClicked(true)}
+                            className={`product new ${
+                                NewClicked ? "clicked" : ""
+                            }`}
+                        >
+                            {!NewClicked && "+"}
+                            {NewClicked && (
+                                <>
+                                    <select
+                                        onChange={(e) => {
+                                            setSelectedProduct(e.target.value);
+                                        }}
+                                    >
+                                        <option value="-1">
+                                            Selecione um produto
+                                        </option>
+                                        {Products &&
+                                            Products.map((product) => (
+                                                <option
+                                                    value={product.id_produto}
+                                                >
+                                                    {product.nm_produto}
+                                                </option>
+                                            ))}
+                                    </select>
+
+                                    <div
+                                        onClick={() => {
+                                            if (SelectedProduct !== -1)
+                                                setComandaProducts([
+                                                    ...ComandaProducts,
+                                                    parseInt(SelectedProduct),
+                                                ]);
+                                        }}
+                                        className="add"
+                                    >
+                                        adicionar
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                        <div className="products">
+                            {ComandaProducts.map((product, index) => {
+                                const productData = Products.find(
+                                    (p) => p.id_produto === product
+                                );
+                                return (
+                                    <div className="product empty" key={index}>
+                                        <div>{productData.nm_produto}</div>
+                                        <div>{productData.vl_produto}</div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+                <div className="bottom empty">
+                    {BodyOpen && ComandaProducts.length !== 0 && (
+                        <div onClick={add} className="add">
+                            adicionar comanda
+                        </div>
+                    )}
+                </div>
+            </div>
         </Comanda>
     );
 };
@@ -25,9 +125,11 @@ export default (props) => {
 
     // Modal states
     const [ModalOpen, setModalOpen] = useState(false);
-    const [ModalProduct, setModalProduct] = useState(null);
+    const [ModalProduct, setModalProduct] = useState({});
     const [Reason, setReason] = useState();
     const [NeedReload, setNeedReload] = useState(false);
+
+    const [PaymentMethods, setPaymentMethods] = useState([]);
 
     let Total = 0;
     if (props.children) {
@@ -35,9 +137,7 @@ export default (props) => {
             return acc + (cur.cancelled ? 0 : parseInt(cur.price));
         }, 0);
     }
-    if (props.comanda.desconto) {
-        Total -= props.comanda.desconto;
-    }
+
     if (Total < 0) Total = 0;
 
     // console.log(props.children);
@@ -50,7 +150,13 @@ export default (props) => {
 
             setProducts(json.products);
         };
+        const getPaymentMethods = async () => {
+            const json = await api.getPaymentMethods();
+            setPaymentMethods(json.paymentMethods);
+        };
+
         getProducts();
+        getPaymentMethods();
     }, []);
 
     const openModal = (product) => {
@@ -90,7 +196,10 @@ export default (props) => {
                 id_produto: selectedProduct,
             });
 
-            if (json.error) setError(json.error);
+            if (json.error) {
+                setError(json.error);
+                return;
+            }
             console.log(props.children);
             props.children.push({
                 ID: json.id_produto,
@@ -103,6 +212,10 @@ export default (props) => {
         };
         if (selectedProduct === -1) return;
         addProductToComanda();
+    };
+
+    const finalizeComanda = () => {
+        setModalOpen(true);
     };
 
     const dateComandaOptions = {
@@ -282,35 +395,14 @@ export default (props) => {
                                 </div>
                             );
                         })}
-                        {props.comanda.desconto !== 0 && (
-                            <div className="product">
-                                <div className="name">
-                                    <span
-                                        style={{
-                                            marginRight: "5px",
-                                            visibility: "hidden",
-                                        }}
-                                    >
-                                        X
-                                    </span>
-                                    desconto
-                                </div>
-                                <div className="date"></div>
-                                <div className="price">
-                                    {" "}
-                                    -
-                                    {priceFormatter.format(
-                                        props.comanda.desconto
-                                    )}
-                                </div>
-                            </div>
-                        )}
                     </div>
                 )}
 
                 <div className="bottom">
                     {BodyOpen && (
-                        <div className="finalize">finalizar comanda</div>
+                        <div onClick={finalizeComanda} className="finalize">
+                            finalizar comanda
+                        </div>
                     )}
 
                     {!BodyOpen && (

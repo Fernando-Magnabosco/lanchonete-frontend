@@ -39,6 +39,11 @@ const Comanda = styled.div`
                 background-color: lightgray;
             }
         }
+
+        &.empty {
+            justify-content: center;
+            font-weight: bold;
+        }
     }
     .body {
         -webkit-user-select: none;
@@ -47,6 +52,7 @@ const Comanda = styled.div`
         flex-wrap: wrap;
         padding: 10px;
         height: 40px;
+        min-height: 40px;
         background-color: #242424;
 
         &.open {
@@ -76,6 +82,10 @@ const Comanda = styled.div`
 
                     & > div {
                         flex: 1;
+                    }
+
+                    &.empty {
+                        padding-left: 15px;
                     }
 
                     button {
@@ -163,6 +173,13 @@ const Comanda = styled.div`
             .finalize:hover {
                 text-decoration: underline;
                 cursor: pointer;
+            }
+            &.empty {
+                justify-content: right;
+                .add:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
             }
         }
     }

@@ -240,8 +240,18 @@ const API = {
         return json;
     },
 
+    addComanda: async (body) => {
+        const json = await apiFetchPost("/comanda/add", body);
+        return json;
+    },
+
     addProductToComanda: async (body) => {
         const json = await apiFetchPost("/comanda/item/add", body);
+        return json;
+    },
+
+    getPaymentMehods: async () => {
+        const json = await apiFetchGet("/paymentmethod/list");
         return json;
     },
 
