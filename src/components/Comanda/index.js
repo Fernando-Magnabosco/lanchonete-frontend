@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Comanda from "./styled";
 import useApi from "../../helpers/api";
 import { useEffect } from "react";
+import MaskedInput from "react-text-mask";
+import createNumberMask from "text-mask-addons/dist/createNumberMask";
 
-export const Empty = () => {
+export const Empty = (props) => {
     // Body states
     const [BodyOpen, setBodyOpen] = useState(true);
     const [NewClicked, setNewClicked] = useState(true);
-    const [Products, setProducts] = useState([]);
     const [ComandaProducts, setComandaProducts] = useState([]);
     const [SelectedProduct, setSelectedProduct] = useState(-1);
 
@@ -23,14 +24,6 @@ export const Empty = () => {
         addComanda();
         setComandaProducts([]);
     };
-    useEffect(() => {
-        const getProducts = async () => {
-            const json = await api.getProducts();
-
-            setProducts(json.products);
-        };
-        getProducts();
-    }, []);
 
     return (
         <Comanda>
@@ -60,8 +53,8 @@ export const Empty = () => {
                                         <option value="-1">
                                             Selecione um produto
                                         </option>
-                                        {Products &&
-                                            Products.map((product) => (
+                                        {props.Products &&
+                                            props.Products.map((product) => (
                                                 <option
                                                     value={product.id_produto}
                                                 >
@@ -87,7 +80,7 @@ export const Empty = () => {
                         </div>
                         <div className="products">
                             {ComandaProducts.map((product, index) => {
-                                const productData = Products.find(
+                                const productData = props.Products.find(
                                     (p) => p.id_produto === product
                                 );
                                 return (
@@ -113,24 +106,6 @@ export const Empty = () => {
 };
 
 export default (props) => {
-    const [Error, setError] = useState();
-
-    // Header states
-
-    // Body states
-    const [BodyOpen, setBodyOpen] = useState(false);
-    const [NewClicked, setNewClicked] = useState(false);
-    const [Products, setProducts] = useState([]);
-    let selectedProduct = -1;
-
-    // Modal states
-    const [ModalOpen, setModalOpen] = useState(false);
-    const [ModalProduct, setModalProduct] = useState({});
-    const [Reason, setReason] = useState();
-    const [NeedReload, setNeedReload] = useState(false);
-
-    const [PaymentMethods, setPaymentMethods] = useState([]);
-
     let Total = 0;
     if (props.children) {
         Total = props.children.reduce((acc, cur) => {
@@ -140,29 +115,43 @@ export default (props) => {
 
     if (Total < 0) Total = 0;
 
-    // console.log(props.children);
+    const [Error, setError] = useState();
+
+    // Header states
+
+    // Body states
+    const [BodyOpen, setBodyOpen] = useState(false);
+    const [NewClicked, setNewClicked] = useState(false);
+    let selectedProduct = -1;
+
+    // Modal states
+    const [ModalOpen, setModalOpen] = useState(false);
+    const [ModalProduct, setModalProduct] = useState({});
+    const [Reason, setReason] = useState();
+    const [NeedReload, setNeedReload] = useState(false);
+    const [ModalMenu, setModalMenu] = useState(0);
+    const [ToPay, setToPay] = useState(Total);
+    const [PaidWith, setPaidWith] = useState({});
+    const [PaymentError, setPaymentError] = useState("");
 
     const api = useApi();
 
     useEffect(() => {
-        const getProducts = async () => {
-            const json = await api.getProducts();
+        let sum = 0;
+        for (const paymentMethod in PaidWith) {
+            if (isNaN(PaidWith[paymentMethod])) continue;
+            sum += PaidWith[paymentMethod];
+        }
 
-            setProducts(json.products);
-        };
-        const getPaymentMethods = async () => {
-            const json = await api.getPaymentMethods();
-            setPaymentMethods(json.paymentMethods);
-        };
-
-        getProducts();
-        getPaymentMethods();
-    }, []);
+        setToPay(Total - sum);
+    }, [PaidWith]);
 
     const openModal = (product) => {
         setError("");
         setModalOpen(true);
+        setModalMenu(0);
         setModalProduct(product);
+        setPaymentError("");
     };
 
     const handleCancel = (e) => {
@@ -175,9 +164,9 @@ export default (props) => {
                 reason: Reason,
                 garcom,
             });
-            console.log(json);
+
             if (json.error) setError(json.error);
-            console.log(garcom);
+
             setModalProduct({
                 ...ModalProduct,
                 cancelled: true,
@@ -187,6 +176,29 @@ export default (props) => {
             setNeedReload(true);
         };
         cancelProduct();
+    };
+
+    const handlePayment = (e) => {
+        setPaymentError("");
+        if (ToPay !== 0) {
+            setPaymentError("Pagamento está diferente do total");
+            return;
+        }
+        if (ToPay < 0) {
+            setPaymentError("Pagamento não pode ser menor que o total");
+            return;
+        }
+
+        const payment = async () => {
+            const json = await api.payment({
+                id_comanda: props.comanda.ID,
+                paidWith: PaidWith,
+            });
+
+            if (json.error) setPaymentError(json.error);
+            window.location.reload();
+        };
+        payment();
     };
 
     const ProductToComanda = () => {
@@ -200,7 +212,6 @@ export default (props) => {
                 setError(json.error);
                 return;
             }
-            console.log(props.children);
             props.children.push({
                 ID: json.id_produto,
                 name: json.nm_produto,
@@ -211,11 +222,14 @@ export default (props) => {
             setNewClicked(false);
         };
         if (selectedProduct === -1) return;
+
         addProductToComanda();
     };
 
     const finalizeComanda = () => {
+        setModalMenu(1);
         setModalOpen(true);
+        setPaymentError("");
     };
 
     const dateComandaOptions = {
@@ -239,6 +253,14 @@ export default (props) => {
         minimumIntegerDigits: "2",
     });
 
+    const priceMask = createNumberMask({
+        prefix: "R$ ",
+        includeThousandsSeparator: true,
+        thousandsSeparatorSymbol: ".",
+        allowDecimal: true,
+        decimalSymbol: ",",
+    });
+
     return (
         <Comanda>
             {ModalOpen && (
@@ -259,7 +281,8 @@ export default (props) => {
                         >
                             X
                         </button>
-                        {ModalProduct.cancelled && (
+
+                        {ModalMenu === 0 && ModalProduct.cancelled && (
                             <div className="text">
                                 <div className="reason">
                                     Motivo: {ModalProduct.motivocancelamento}
@@ -270,7 +293,7 @@ export default (props) => {
                                 </span>
                             </div>
                         )}
-                        {!ModalProduct.cancelled && (
+                        {ModalMenu === 0 && !ModalProduct.cancelled && (
                             <div className="text">
                                 <textarea
                                     maxLength="500"
@@ -281,6 +304,72 @@ export default (props) => {
                                 <button onClick={handleCancel}>
                                     cancelar pedido
                                 </button>
+                            </div>
+                        )}
+                        {ModalMenu === 1 && (
+                            <div className="payment">
+                                {props.PaymentMethods &&
+                                    props.PaymentMethods.map(
+                                        (paymentMethod) => {
+                                            return (
+                                                <div className="paymentMethod">
+                                                    <span>
+                                                        {
+                                                            paymentMethod.nomeformapagamento
+                                                        }
+                                                    </span>
+                                                    <MaskedInput
+                                                        onChange={(e) =>
+                                                            setPaidWith({
+                                                                ...PaidWith,
+                                                                [paymentMethod.idformapagamento]:
+                                                                    parseFloat(
+                                                                        e.target.value.substring(
+                                                                            3
+                                                                        )
+                                                                    ),
+                                                            })
+                                                        }
+                                                        mask={priceMask}
+                                                        placeholder="R$"
+                                                    />
+                                                </div>
+                                            );
+                                        }
+                                    )}
+                                <div className="paymentMethod">
+                                    <span> desconto </span>
+                                    <MaskedInput
+                                        onChange={(e) =>
+                                            setPaidWith({
+                                                ...PaidWith,
+                                                desconto: parseFloat(
+                                                    e.target.value.substring(3)
+                                                ),
+                                            })
+                                        }
+                                        mask={priceMask}
+                                        placeholder="R$"
+                                    />
+                                </div>
+
+                                <div className="paymentMethod">
+                                    <span>total:</span>
+                                    <span>{priceFormatter.format(ToPay)}</span>
+                                </div>
+                                <div className="bottom">
+                                    <div className="error">
+                                        {PaymentError && (
+                                            <span>{PaymentError}</span>
+                                        )}
+                                    </div>
+                                    <div
+                                        onClick={handlePayment}
+                                        className="submit"
+                                    >
+                                        pagar
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>
@@ -328,8 +417,8 @@ export default (props) => {
                                         <option value="-1">
                                             Selecione um produto
                                         </option>
-                                        {Products &&
-                                            Products.map((product) => (
+                                        {props.Products &&
+                                            props.Products.map((product) => (
                                                 <option
                                                     value={product.id_produto}
                                                 >
@@ -399,12 +488,14 @@ export default (props) => {
                 )}
 
                 <div className="bottom">
-                    {BodyOpen && (
+                    {BodyOpen && props.comanda.status !== 0 && (
                         <div onClick={finalizeComanda} className="finalize">
                             finalizar comanda
                         </div>
                     )}
-
+                    {BodyOpen && props.comanda.status === 0 && (
+                        <div className=""></div>
+                    )}
                     {!BodyOpen && (
                         <div className="garcomName">{props.comanda.garcom}</div>
                     )}

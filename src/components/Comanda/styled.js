@@ -7,6 +7,16 @@ const Comanda = styled.div`
     margin: 10px;
     color: white;
 
+    select {
+        all: unset;
+        background-color: #141414;
+        position: relative;
+        padding-left: 15px;
+        flex: 1;
+        text-overflow: ellipsis;
+        cursor: pointer;
+    }
+
     .header {
         display: flex;
         justify-content: space-between;
@@ -122,15 +132,7 @@ const Comanda = styled.div`
 
                     &.clicked {
                         font-weight: normal;
-                        select {
-                            all: unset;
-                            background-color: #141414;
-                            position: relative;
-                            padding-left: 15px;
-                            flex: 1;
-                            text-overflow: ellipsis;
-                            cursor: pointer;
-                        }
+
                         .add {
                             flex: 2;
                             text-align: right;
@@ -253,6 +255,39 @@ const Comanda = styled.div`
                     height: 130px;
                     padding: 10px;
                     background-color: #343434;
+                }
+            }
+
+            .payment {
+                width: 90%;
+                margin: 10px;
+                .paymentMethod {
+                    margin: 5px;
+                    display: flex;
+                    justify-content: space-between;
+
+                    input {
+                        all: unset;
+                        width: 40%;
+                        background-color: #141414;
+                    }
+                }
+                .bottom {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 5px;
+                    .error {
+                        width: 80%;
+                        text-overflow: ellipsis;
+                    }
+                    .submit {
+                        width: 20%;
+                        cursor: pointer;
+                        text-align: right;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
                 }
             }
         }

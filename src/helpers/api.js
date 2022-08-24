@@ -159,8 +159,8 @@ const API = {
         return json;
     },
 
-    addFormasPagamentos: async (name) => {
-        const json = await apiFetchPost("/formaspagamentos/add", { name });
+    addPaymentMethod: async (name) => {
+        const json = await apiFetchPost("/paymentmethod/add", { name });
         return json;
     },
 
@@ -179,8 +179,8 @@ const API = {
         return json;
     },
 
-    getFormaspagamentos: async () => {
-        const json = await apiFetchGet("/formaspagamento/list");
+    getPaymentMethods: async () => {
+        const json = await apiFetchGet("/paymentmethod/list");
         return json;
     },
 
@@ -194,8 +194,8 @@ const API = {
         return json;
     },
 
-    updateFormasPagamento: async (id, name) => {
-        const json = await apiFetchPut(`/formaspagamento/${id}`, { name });
+    updatePaymentMethod: async (id, name) => {
+        const json = await apiFetchPut(`/paymentmethod/${id}`, { name });
         return json;
     },
 
@@ -204,8 +204,8 @@ const API = {
         return json;
     },
 
-    toggleFormaspagamentos: async (id) => {
-        const json = await apiFetchPost("/formaspagamento/toggle", { id });
+    togglePaymentMethod: async (id) => {
+        const json = await apiFetchPost("/paymentmethod/toggle", { id });
         return json;
     },
 
@@ -250,8 +250,8 @@ const API = {
         return json;
     },
 
-    getPaymentMehods: async () => {
-        const json = await apiFetchGet("/paymentmethod/list");
+    payment: async (body) => {
+        const json = await apiFetchPost("/comanda/payment", body);
         return json;
     },
 

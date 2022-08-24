@@ -7,6 +7,8 @@ import useApi from "../../helpers/api";
 
 const Page = () => {
     const [Comandas, setComandas] = useState([]);
+    const [PaymentMethods, setPaymentMethods] = useState([]);
+    const [Products, setProducts] = useState([]);
 
     const api = useApi();
     useEffect(() => {
@@ -14,8 +16,19 @@ const Page = () => {
             const json = await api.getComandas();
             setComandas(json.comandas);
         };
+        const getProducts = async () => {
+            const json = await api.getProducts();
+            setProducts(json.products);
+        };
+        const getPaymentMethods = async () => {
+            const json = await api.getPaymentMethods();
+            console.log(json);
+            setPaymentMethods(json.formasPagamento);
+        };
 
         getComandas();
+        getProducts();
+        getPaymentMethods();
         const interval = setInterval(getComandas, 3000);
         return () => clearInterval(interval);
     }, []);
@@ -29,6 +42,8 @@ const Page = () => {
                 {Comandas.map((comanda) => (
                     <Pedido
                         key={comanda.ID}
+                        Products={Products}
+                        PaymentMethods={PaymentMethods}
                         comanda={{
                             ID: comanda.id_comanda,
                             garcom: comanda.garcom.name,
